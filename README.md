@@ -1,66 +1,63 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Proyecto: Red Social y Marketplace de Libros
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Autores
 
-## About Laravel
+- Cristian David Nievas Lozano
+- Andrei George Mira
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Descripción
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Este proyecto busca crear una plataforma que combine elementos de una red social con un marketplace, centrándose en el mundo de los libros. Inspirado en la funcionalidad de sitios como [letterboxd](https://letterboxd.com/), nuestro objetivo es ofrecer una experiencia única para los amantes de la lectura, donde puedan interactuar, descubrir nuevos libros, compartir reseñas y conectar con otros usuarios con intereses similares.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Tecnologías Utilizadas
 
-## Learning Laravel
+El proyecto se desarrollará utilizando las siguientes tecnologías:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- **Laravel:** Como motor principal del backend, proporcionando un entorno robusto y eficiente para la creación de aplicaciones web PHP.
+- **PostgreSQL:** Base de datos para la gestión de datos en el backend, ofreciendo características avanzadas y escalabilidad.
+- **Tailwind CSS:** Herramienta poderosa y versátil para el diseño de la interfaz de usuario, permitiendo construir interfaces web personalizadas de manera eficiente.
+- **VPS, Docker y Nginx Proxy Manager:** Para la implementación y despliegue de la aplicación, ofreciendo una solución flexible y escalable para la infraestructura.
+- **Notion y Github:** Para la organización del trabajo y la colaboración entre los miembros del equipo.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Funcionalidades Principales
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- **Ficha de libro:** Mostrará toda la información relevante sobre un libro.
+- **Rating y reseñas de libros:** Permitirá a los usuarios calificar y dejar reseñas sobre los libros.
+- **Sistema de seguidores:** Los usuarios podrán seguirse entre sí, generando una feed de actividades de los amigos.
+- **Perfil de usuario:** Con secciones para los top 5 libros, lista de lectura, biografía y registro de libros leídos.
+- **Búsqueda y filtrado de libros:** Permitirá a los usuarios buscar libros por categorías, autores, etc.
 
-## Laravel Sponsors
+## Monetización
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Se plantea monetizar la plataforma mediante:
 
-### Premium Partners
+1. **Publicidad:** Anuncios integrados de forma elegante en la plataforma.
+2. **Referidos de Amazon:** Enlaces de afiliados a libros de Amazon.
+3. **Suscripción premium:** Ofreciendo características adicionales a los usuarios premium.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+## Diseño
 
-## Contributing
+- **Colores:** Predominantemente blanco con tonos marrones claros.
+- **Estructura:** Se seguirá un diseño enfocado en la usabilidad y la experiencia del usuario, con una distribución intuitiva de las funcionalidades.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Metodología GitHub
 
-## Code of Conduct
+### Ramas Principales
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+1. **main:** Contiene la versión estable y lista para producción.
+2. **develop:** Rama de desarrollo continua donde se integran todas las características terminadas.
 
-## Security Vulnerabilities
+### Ramas de Funcionalidades
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+1. **feature/nombre-de-la-funcionalidad:** Para desarrollar nuevas características o tareas.
+2. **fix/nombre-del-bug:** Para corregir errores identificados.
 
-## License
+## Recursos
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- **Frases para banner:** Se incluyen frases inspiradoras relacionadas con la lectura para banners principales.
+- **Referencias de páginas similares:** Se proporcionan enlaces a sitios web similares para referencia.
+- **APIs de libros:** Recursos para obtener información sobre libros y autores.
+- **API para traducción:** Herramienta para facilitar la traducción de contenido.
+- **Librería de componentes Blade + Tailwind:** Recurso útil para el diseño de la interfaz de usuario.
+
+¡Bienvenidos a contribuir y hacer crecer este proyecto!
