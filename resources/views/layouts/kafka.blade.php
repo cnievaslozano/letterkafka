@@ -9,6 +9,16 @@
     <title>Letter Kafka</title>
     <link rel="shortcut icon" href="{{ asset('kafka-white.ico') }}" type="image/x-icon">
 
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital@0;1&family=Playfair+Display+SC:wght@900&family=Playfair+Display:ital,wght@0,800;1,800&family=Manrope:wght@800&display=swap"
+        rel="stylesheet">
+
+
     <!-- Bladewindui -->
     <link href="{{ asset('vendor/bladewind/css/animate.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('vendor/bladewind/css/bladewind-ui.min.css') }}" rel="stylesheet" />
@@ -25,8 +35,11 @@
 </head>
 
 <body>
-    <!-- Contenido de la página -->
-    <div class="home-container">
-        {{ $slot }}
+    <div class="main__wrapper">
+        <main>
+            <x-kafka.header />
+            {{ $slot }}
+        </main>
+        <x-kafka.footer />
     </div>
 </body>
