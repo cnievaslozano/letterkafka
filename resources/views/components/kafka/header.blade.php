@@ -1,4 +1,4 @@
-<h1>Letter Kafka
+<h1>LetterKafka
     <x-kafka.logo width="120" />
 </h1>
 <header>

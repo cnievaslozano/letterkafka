@@ -27,6 +27,14 @@
     border-color: #e8c382;
 }
 
+.hover-kafka:hover {
+    color: #e8c382;
+}
+
+.hover-bg-kafka:hover {
+    background-color: #e8c382;
+}
+
 /*************************************************************
     kafka-light 
 **************************************************************/
@@ -40,6 +48,14 @@
 
 .border-kafka-light {
     border-color: #b39d69;
+}
+
+.hover-kafka-light:hover {
+    color: #b39d69;
+}
+
+.hover-bg-kafka-light:hover {
+    background-color: #b39d69;
 }
 
 /*************************************************************
@@ -57,6 +73,14 @@
     border-color: #7d1a0c;
 }
 
+.hover-castle:hover {
+    color: #7d1a0c;
+}
+
+.hover-bg-castle:hover {
+    background-color: #7d1a0c;
+}
+
 /*************************************************************
     castle-light 
 **************************************************************/
@@ -72,6 +96,14 @@
     border-color: #a86b4c;
 }
 
+.hover-castle-light:hover {
+    color: #a86b4c;
+}
+
+.hover-bg-castle-light:hover {
+    background-color: #a86b4c;
+}
+
 /*************************************************************
     castle-dark 
 **************************************************************/
@@ -85,4 +117,12 @@
 
 .border-castle-dark {
     border-color: #340a0b;
+}
+
+.hover-castle-dark:hover {
+    color: #340a0b;
+}
+
+.hover-bg-castle-dark:hover {
+    background-color: #340a0b;
 }
