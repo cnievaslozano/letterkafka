@@ -9,7 +9,7 @@
                 </figcaption></a></h4>
         <div class="multi-column-3">
             <p>
-                {{ $texto }} <a href="{{ $enlace }}">Leer más</a>
+                {{ $texto }} <a href="{{ $enlace }}" target="_blank">Leer más</a>
             </p>
         </div>
     </div>
