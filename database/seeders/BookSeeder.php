@@ -1,58 +1,29 @@
 <?php
-
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use GuzzleHttp\Client;
-use App\Models\Book;
+use Illuminate\Support\Facades\DB;
+use Faker\Factory as Faker;
 
 class BookSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
-    public function run(): void
+    public function run()
     {
-        $client = new Client();
+        $faker = Faker::create();
 
-        $existingBookIds = Book::pluck('book_id')->toArray();
-        $successfulRequests = 0;
-
-        for ($i = 0; $i < 1000; $i++) {
-            $response = $client->request('GET', 'https://books-api7.p.rapidapi.com/books/get/random/', [
-                'headers' => [
-                    'X-RapidAPI-Host' => 'books-api7.p.rapidapi.com',
-                    'X-RapidAPI-Key' => '74f7b80806mshe51d26471ed199fp17cdfdjsn83face454e73',
-                ],
+        foreach (range(1, 20) as $index) {
+            \Illuminate\Support\Facades\DB::table('books')->insert([
+                'author_first_name' => $faker->firstName,
+                'author_last_name' => $faker->lastName,
+                'title' => $faker->sentence,
+                'pages' => $faker->numberBetween(100, 500),
+                'genres' => $faker->word,
+                'rating' => $faker->randomFloat(1, 1, 5),
+                'plot' => $faker->paragraph,
+                'cover' => $faker->imageUrl(200, 300),
+                'url' => $faker->url
             ]);
-
-            $bookData = json_decode($response->getBody(), true);
-
-            // Verificar si la clave "review" existe en el arreglo
-            if (array_key_exists('review', $bookData)) {
-                if (!in_array($bookData['book_id'], $existingBookIds)) {
-                    Book::create([
-                        'author_first_name' => $bookData['author']['first_name'],
-                        'author_last_name' => $bookData['author']['last_name'],
-                        'review_name' => $bookData['review']['name'],
-                        'review_body' => $bookData['review']['body'],
-                        'external_id' => $bookData['_id'],
-                        'book_id' => $bookData['book_id'],
-                        'title' => $bookData['title'],
-                        'pages' => $bookData['pages'],
-                        'genres' => json_encode($bookData['genres']),
-                        'rating' => $bookData['rating'],
-                        'plot' => $bookData['plot'],
-                        'cover' => $bookData['cover'],
-                        'url' => $bookData['url'],
-                    ]);
-
-                    $existingBookIds[] = $bookData['book_id']; // Agrega el nuevo book_id a la lista de ids existentes
-                    $successfulRequests++;
-                }
-            }
         }
-
-        echo "Se guardaron $successfulRequests libros en la base de datos.";
     }
 }
+
