@@ -17,6 +17,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/info', function () {
+    phpinfo();
+});
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
