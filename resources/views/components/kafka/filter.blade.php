@@ -181,11 +181,11 @@
           </div>
         </div>
       </div>
-  
-      <main class="mx-auto max-w-2xl px-4 sm:px-6 sm:py-28 lg:max-w-7xl lg:px-8">
+      <!-- PC -->
+      <main class="mx-auto max-w-2xl px-4 sm:px-6  lg:max-w-7xl lg:px-8">
        
   
-        <div class=" lg:grid lg:grid-cols-3 lg:gap-x-8 xl:grid-cols-4">
+        <div class=" ">
           <aside>
             <h2 class="sr-only">Filters</h2>
   
@@ -201,7 +201,7 @@
               <form class="space-y-10 divide-y divide-black">
                 <div>
                   <fieldset>
-                    <legend class="block text-sm font-medium text-gray-900">Géneros</legend>
+                    <legend class="block text-md font-medium text-gray-900">Géneros</legend>
                     <div class="space-y-3 pt-6">
                       <div class="flex items-center">
                         <input id="color-0" name="color[]" value="white" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-stone-900 focus:ring-orange-300">
@@ -232,7 +232,7 @@
                 </div>
                 <div class="pt-10">
                   <fieldset>
-                    <legend class="block text-sm font-medium text-gray-900">Duración</legend>
+                    <legend class="block text-md font-medium text-gray-900">Duración</legend>
                     <div class="space-y-3 pt-6">
                       <div class="flex items-center">
                         <input id="category-0" name="category[]" value="new-arrivals" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-stone-900 focus:ring-orange-300">
@@ -259,7 +259,7 @@
                 </div>
                 <div class="pt-10">
                   <fieldset>
-                    <legend class="block text-sm font-medium text-gray-900">Mejores valorados</legend>
+                    <legend class="block text-md font-medium text-gray-900">Mejores valorados</legend>
                     <div class="space-y-3 pt-6">
                       <div class="flex items-center">
                         <input id="sizes-0" name="sizes[]" value="xs" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-stone-900 focus:ring-orange-300">
