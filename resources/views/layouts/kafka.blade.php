@@ -36,10 +36,7 @@
 
 <body>
     <div class="main__wrapper">
-        <main>
-            <x-kafka.header />
             {{ $slot }}
-        </main>
         <x-kafka.footer />
     </div>
 </body>
