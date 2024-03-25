@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Seeders;
+// database/seeders/ReviewSeeder.php
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -12,12 +12,15 @@ class ReviewSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        foreach (range(1, 50) as $index) {
+        foreach (range(1, 100) as $index) {
             DB::table('reviews')->insert([
-                'review_name' => $faker->name,
-                'review_body' => $faker->paragraph,
-                'external_id' => $faker->unique()->randomNumber(),
-                'book_id' => $faker->numberBetween(1, 20)
+                'user' => $faker->userName,
+                'username' => $faker->name,
+                'createdAt' => $faker->dateTimeThisMonth(),
+                'content' => $faker->paragraph,
+                'portada' => $faker->imageUrl($width = 32, $height = 48),
+                'created_at' => now(),
+                'updated_at' => now(),
             ]);
         }
     }
