@@ -15,6 +15,8 @@ class CreateReviewsTable extends Migration
             $table->timestamp('createdAt');
             $table->text('content');
             $table->string('portada');
+            $table->string('userImage'); 
+            $table->integer('likes')->default(0); 
             $table->timestamps();
         });
     }
