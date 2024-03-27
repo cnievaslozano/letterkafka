@@ -12,9 +12,12 @@ class FeedController extends Controller
      */
     public function index()
     {
+
+        $reviewsPopulares = Review::orderBy('likes', 'desc')->take(3)->get();
+
         $reviews = Review::latest()->take(50)->get();
         
         // Pasar las reviews a la vista
-        return view('feed', ['reviews' => $reviews]);
+        return view('feed', ['reviews' => $reviews, 'reviewsPopulares' => $reviewsPopulares]);
     }
 }
