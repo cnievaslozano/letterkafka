@@ -1,5 +1,4 @@
 <?php
-
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
@@ -8,10 +7,7 @@ use App\Models\Book;
 
 class BookSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
-    public function run(): void
+    public function run()
     {
         $jsonPath = base_path('database/info-books/planeta_libros.json');
 

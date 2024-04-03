@@ -1,0 +1,128 @@
+/*
+    COLORS PALLETTE - UTILITIES CLASSES
+
+    MAIN COLORS:
+        kafka -> #e8c382
+        kafka-light -> #b39d69       
+    
+    COMPLEMENTARY COLORS:
+        castle -> #7d1a0c
+        castle-light -> #a86b4c
+        castle-dark -> #340a0b
+
+*/
+
+/*************************************************************
+    kafka 
+**************************************************************/
+.kafka {
+    color: #e8c382;
+}
+
+.bg-kafka {
+    background-color: #e8c382;
+}
+
+.border-kafka {
+    border-color: #e8c382;
+}
+
+.hover-kafka:hover {
+    color: #e8c382;
+}
+
+.hover-bg-kafka:hover {
+    background-color: #e8c382;
+}
+
+/*************************************************************
+    kafka-light 
+**************************************************************/
+.kafka-light {
+    color: #b39d69;
+}
+
+.bg-kafka-light {
+    background-color: #b39d69;
+}
+
+.border-kafka-light {
+    border-color: #b39d69;
+}
+
+.hover-kafka-light:hover {
+    color: #b39d69;
+}
+
+.hover-bg-kafka-light:hover {
+    background-color: #b39d69;
+}
+
+/*************************************************************
+    castle 
+**************************************************************/
+.castle {
+    color: #7d1a0c;
+}
+
+.bg-castle {
+    background-color: #7d1a0c;
+}
+
+.border-castle {
+    border-color: #7d1a0c;
+}
+
+.hover-castle:hover {
+    color: #7d1a0c;
+}
+
+.hover-bg-castle:hover {
+    background-color: #7d1a0c;
+}
+
+/*************************************************************
+    castle-light 
+**************************************************************/
+.castle-light {
+    color: #a86b4c;
+}
+
+.bg-castle-light {
+    background-color: #a86b4c;
+}
+
+.border-castle-light {
+    border-color: #a86b4c;
+}
+
+.hover-castle-light:hover {
+    color: #a86b4c;
+}
+
+.hover-bg-castle-light:hover {
+    background-color: #a86b4c;
+}
+
+/*************************************************************
+    castle-dark 
+**************************************************************/
+.castle-dark {
+    color: #340a0b;
+}
+
+.bg-castle-dark {
+    background-color: #340a0b;
+}
+
+.border-castle-dark {
+    border-color: #340a0b;
+}
+
+.hover-castle-dark:hover {
+    color: #340a0b;
+}
+
+.hover-bg-castle-dark:hover {
+    background-color: #340a0b;
+}

@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LibrosController;
+use App\Http\Controllers\FeedController;
+use App\Http\Controllers\EstanteriasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,9 +16,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// MENU ROUTES
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
+Route::get('libros', [LibrosController::class,'index'])->name('libros.index');
+Route::get('feed', [FeedController::class,'index'])->name('feed.index');
+Route::get('mis-estanterias', [EstanteriasController::class,'index'])->name('estanterias.index');
+
+
 
 Route::get('/info', function () {
     phpinfo();
