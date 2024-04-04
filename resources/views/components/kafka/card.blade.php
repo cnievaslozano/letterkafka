@@ -13,7 +13,7 @@
             <div class="text-md flex justify-between px-4">
                 <span class="font-bold">{{ $autor }} | {{ $genres }} | {{ $duration }}</span>
             </div>
-            <p class="hidden md:block px-4 my-4 text-sm text-left">{{ $description }}</p>
+            <p class="hidden md:block px-4 my-4 text-sm text-left">{{ implode(' ', array_slice(explode(' ', $description), 0, 100)) }}...</p>
 
             <p class="flex text-md px-4 my-2">
                 Rating: {{ $rating }}
@@ -29,5 +29,5 @@
             </div>
         </div>
     </div>
-    
+
 </div>

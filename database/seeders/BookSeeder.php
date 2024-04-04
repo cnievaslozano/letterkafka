@@ -26,8 +26,8 @@ class BookSeeder extends Seeder
 
             Book::create([
                 'title' => $bookData['Titulo'],
-                'author' => $bookData['Autor'],
-                'description' => $bookData['Descripcion'],
+                'author' => mb_convert_encoding($bookData['Autor'], 'UTF-8', 'UTF-8'),
+                'description' => mb_convert_encoding($bookData['Descripcion'], 'UTF-8', 'UTF-8'),
                 'genre' => $bookData['Genero'],
                 'buy_links' => json_encode($bookData['Links_compras']),
                 'pages' => $pagines,
