@@ -20,17 +20,23 @@ use App\Http\Controllers\EstanteriasController;
 Route::get('/', function () {
     return view('home');
 });
-Route::get('libros', [LibrosController::class,'index'])->name('libros.index');
-Route::get('feed', [FeedController::class,'index'])->name('feed.index');
-Route::get('mis-estanterias', [EstanteriasController::class,'index'])->name('estanterias.index');
+Route::get('libros', [LibrosController::class, 'index'])->name('libros.index');
+Route::get('feed', [FeedController::class, 'index'])->name('feed.index');
+Route::get('mis-estanterias', [EstanteriasController::class, 'index'])->name('estanterias.index');
+
+// FOOTER ROUTES
+Route::get('sobre-nosotros', function () {
+    return view('sobre-nosotros');
+});
+Route::get('politica-privacidad', function () {
+    return view('politica-privacidad');
+});
+Route::get('contacto', function () {
+    return view('contacto');
+});
 
 
-
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
-])->group(function () {
+Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
