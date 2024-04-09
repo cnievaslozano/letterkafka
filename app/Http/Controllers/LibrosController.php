@@ -13,8 +13,14 @@ class LibrosController extends Controller
     public function index()
     {
         $books = Book::paginate(8);
-        return view('libros', compact('books'));
+        // Obtener todos los géneros de la tabla books
+        $genres = Book::pluck('genre')->unique()->map(function ($genre) {
+            return $genre ?: 'Sin Género';
+        });
+
+        return view('libros', compact('books','genres'));
     }
+
 
     /**
      * Show the form for creating a new resource.
