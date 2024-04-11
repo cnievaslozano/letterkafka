@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use Illuminate\Http\Request;
+use App\Models\Review;
 
 class LibrosController extends Controller
 {
@@ -35,10 +36,16 @@ class LibrosController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(String $title, String $author, int $id)
+    public function show($titulo, $id)
     {
-        $book = Book::find($id);
-        return view('libros.show', compact('book'));
+        
+        $libro = Book::findOrFail($id);
+        $ejReviews = Review::inRandomOrder()->take(5)->get();
+        $ejRecomendaciones = Book::inRandomOrder()->take(4)->get();
+        //$recomendaciones = where etc
+
+
+        return view('ficha', compact('libro', 'ejReviews', 'ejRecomendaciones'));
     }
 
     /**
