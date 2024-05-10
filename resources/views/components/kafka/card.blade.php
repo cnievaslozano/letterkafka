@@ -2,7 +2,7 @@
     <div class="md:flex px-4 leading-none max-w-4xl">
         <div class="flex-none">
             <a href="{{ route('libros.show', ['titulo' => Str::slug($title), 'id' => $id]) }}">                <img src="{{ $imageUrl }}" alt="{{ $title }}"
-                    class="h-72 w-56 rounded-md shadow-2xl transform -translate-y-4 border-2 border-white  shadow-lg" />
+                    class="h-72 w-56 rounded-md transform -translate-y-4 border-2 border-white  shadow-lg" />
             </a>
         </div>
 
