@@ -89,13 +89,12 @@
             </div>
         </div>
     </section>
-    {{-- REVIEWS DEL LIBRO. (ver mas) --}}
-    {{-- Component: User feed  --}}
 
+    {{-- REVIEWS DEL LIBRO. (ver mas) --}}
     <section class="container mx-auto px-28">
         <h2 class="text-black title-font text-center tracking-widest"> REVIEWS </h2>
         <ul aria-label="Reviews feed" role="feed"
-            class="mx-auto relative flex flex-col gap-12 py-12 pl-8 before:absolute before:top-0 before:left-8 before:h-full before:border before:-translate-x-1/2 before:border-orange-800 before:border-dashed after:absolute after:top-6 after:left-8 after:bottom-6 after:border after:-translate-x-1/2 after:border-orange-800 ">
+            class="mx-auto relative flex flex-col gap-12 pt-12 pl-8 before:absolute before:top-0 before:left-8 before:h-full before:border before:-translate-x-1/2 before:border-orange-800 before:border-dashed after:absolute after:top-6 after:left-8 after:bottom-6 after:border after:-translate-x-1/2 after:border-orange-800 ">
             @foreach ($ejReviews as $review)
                 <li role="article" class="relative pl-8 ">
                     <div class="flex flex-col flex-1 gap-4">
@@ -118,6 +117,18 @@
                 </li>
             @endforeach
         </ul>
+        <div
+            class="fter:h-px flex items-center before:h-px before:flex-1  before:bg-orange-800 before:content-[''] after:h-px after:flex-1 after:bg-orange-800  after:content-['']">
+            <button type="button"
+                class="flex items-center rounded-full border border-orange-800 bg-secondary-50 px-3 py-2 text-center text-sm font-medium text-gray-900 hover:bg-orange-100">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="mr-1 h-4 w-4">
+                    <path fill-rule="evenodd"
+                        d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                        clip-rule="evenodd" />
+                </svg>
+                Ver más
+            </button>
+        </div>
     </section>
 
 
@@ -125,7 +136,8 @@
     <section class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
         <h2 class="text-black mb-8 title-font text-center tracking-widest"> RECOMENDADOS </h2>
 
-        <div class="grid grid-cols-1 gap-x-6 gap-y-10 xs:grid-cols-4 sm:grid-cols-4 border-t-2 border-orange-800 py-4 xl:gap-x-8">
+        <div
+            class="grid grid-cols-1 gap-x-6 gap-y-10 xs:grid-cols-4 sm:grid-cols-4 border-t-2 border-orange-800 py-4 xl:gap-x-8">
             @foreach ($ejRecomendaciones as $recomendacion)
                 <a href="#" class="group">
                     <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg xl:aspect-h-8 xl:aspect-w-7">
