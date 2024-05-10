@@ -1,4 +1,4 @@
-<footer class=" w-full max-w-screen-xl mx-auto md:py-8  bottom-0 left-0 right-0">
+<footer id="footer" class="w-full max-w-screen-xl mx-auto md:py-8 bottom-0 left-0 right-0">
     <div class="sm:flex sm:items-center sm:justify-between">
         <a href="#" class="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse">
             <x-kafka.logo width="35" />
@@ -21,3 +21,21 @@
         los derechos reservados.</span>
 
 </footer>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        const footer = document.getElementById('footer');
+        const isScrollable = document.body.scrollHeight > window.innerHeight;
+        if (!isScrollable) {
+            footer.classList.add('fixed');
+        }
+        window.addEventListener('scroll', () => {
+            const isFooterFixed = footer.classList.contains('fixed');
+            const isScrollable = document.body.scrollHeight > window.innerHeight;
+            if (!isFooterFixed && !isScrollable) {
+                footer.classList.add('fixed');
+            } else if (isFooterFixed && isScrollable) {
+                footer.classList.remove('fixed');
+            }
+        });
+    });
+</script>
