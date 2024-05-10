@@ -8,6 +8,17 @@ use App\Models\Review;
 
 class LibrosController extends Controller
 {
+    /*
+        Devuelve la vista de una review
+        Por parametro se le pasará el id
+        y devolvera $review
+    */
+    public function review()
+    {
+        //$review = Review::find($id); algo asi iguess
+        return view('review');
+    }
+
     /**
      * Display a listing of the resource.
      */
