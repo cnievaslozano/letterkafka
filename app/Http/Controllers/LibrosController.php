@@ -18,29 +18,13 @@ class LibrosController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      */
     public function show($titulo, $id)
     {
         
         $libro = Book::findOrFail($id);
-        $ejReviews = Review::inRandomOrder()->take(5)->get();
+        $ejReviews = Review::orderBy('createdAt', 'DESC')->take(4)->get();
         $ejRecomendaciones = Book::inRandomOrder()->take(4)->get();
         //$recomendaciones = where etc
 
