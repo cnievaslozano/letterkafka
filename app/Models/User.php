@@ -58,4 +58,52 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    /**
+     * Get the book lists owned by the user.
+     */
+    public function bookLists()
+    {
+        return $this->hasMany(BookList::class);
+    }
+
+    /**
+     * Get the followers of the user.
+     */
+    public function followers()
+    {
+        return $this->hasMany(Follower::class, 'followed_user_id');
+    }
+
+    /**
+     * Get the users being followed by this user.
+     */
+    public function following()
+    {
+        return $this->hasMany(Follower::class, 'following_user_id');
+    }
+
+    /**
+     * Get the liked books by the user.
+     */
+    public function likedBooks()
+    {
+        return $this->hasMany(LikeBook::class);
+    }
+
+    /**
+     * Get the liked reviews by the user.
+     */
+    public function likedReviews()
+    {
+        return $this->hasMany(LikeReview::class);
+    }
+
+    /**
+     * Get the reviews written by the user.
+     */
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
 }
