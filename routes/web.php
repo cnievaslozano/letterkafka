@@ -26,7 +26,7 @@ Route::get('/', function () {
 });
 Route::get('libros', [LibrosController::class, 'index'])->name('libros.index');
 Route::get('libros/{titulo}/{id}', [LibrosController::class, 'show'])->name('libros.show');
-Route::get('review/id', [LibrosController::class, 'review'])->name('review.show');
+Route::get('review/{id}', [LibrosController::class, 'review'])->name('review.show');
 Route::get('feed', [FeedController::class, 'index'])->name('feed.index');
 Route::get('mis-estanterias', [EstanteriasController::class, 'index'])->name('estanterias.index');
 Route::get('mi-perfil', [UserController::class, 'perfil'])->name('user.perfil');
