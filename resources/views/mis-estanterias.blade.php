@@ -1,6 +1,6 @@
 <x-kafka-layout>
     <x-kafka.header />
-
+    @auth
     <div class="flex flex-col items-center justify-center">
         <h2 class="text-center mt-4 ">Mis Estanterías</h2>
         <div class="flex">
@@ -45,5 +45,7 @@
     {{-- PAGINATOR CUANDO ESTE EL BACKEND
     {{ $books->links('components.kafka.pagination') }}
    --}}
-
+   @else
+        <x-kafka.errorAuth />
+    @endauth
 </x-kafka-layout>

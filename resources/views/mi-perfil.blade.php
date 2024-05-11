@@ -1,6 +1,6 @@
 <x-kafka-layout>
     <x-kafka.header />
-
+    @auth
     <div class="container mx-auto p-4 mt-4 gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 grid-rows-4">
         <div
             class=" col-span-1 md:col-span-2 lg:col-span-2 row-span-2 flex-shrink-0 p-3 flex flex-col items-center justify-center rounded-xl ">
@@ -33,16 +33,23 @@
                 risus suspendisse.
             </p>
             <button type="button" href="#" class="border border-gray-400 text-white rounded-md px-4 py-2 mt-2 transition duration-500 ease select-none  focus:outline-none focus:shadow-outline bg-[#493736]">Editar perfil</button>
+            <form action="{{ route('logout') }}" method="POST">
+                @csrf 
+                <button type="submit" class="w-fit block border border-gray-400 text-white rounded-md px-4 py-2 mt-2 transition duration-500 ease select-none focus:outline-none focus:shadow-outline bg-[#493736]">
+                    Cerrar Sesión
+                </button>
+            </form>
+            
         </div>
         <div
             class=" col-span-1 md:col-span-2 lg:col-span-2 row-span-2 px-16 flex-shrink-0 flex flex-col items-start justify-center rounded-xl ">
             <h3 class="mb-0">Mis listas:</h3>
-            <ul>
+            <ul class="ml-3">
                 <li><a href="">Readlist</a></li>
                 <li><a href="">Only Fantasy</a></li>
                 <li><a href="">Filosofia</a></li>
             </ul>
-            <button type="button" href="#" class="border border-gray-400 text-white rounded-md px-4 py-2 mt-2 transition duration-500 ease select-none  focus:outline-none focus:shadow-outline bg-[#493736]">Crear Lista</button>
+            <button type="button" href="#" class="ml-3 border border-gray-400 text-white rounded-md px-4 py-2 mt-2 transition duration-500 ease select-none  focus:outline-none focus:shadow-outline bg-[#493736]">Crear Lista</button>
         </div>
     </div>
 
@@ -108,4 +115,7 @@
             </button>
         </div>
     </section>
+    @else
+        <x-kafka.errorAuth />
+    @endauth
 </x-kafka-layout>
