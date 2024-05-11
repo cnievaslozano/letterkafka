@@ -28,7 +28,7 @@
                             alt="Tall slender porcelain bottle with natural clay textured body and cork stopper."
                             class="h-full w-full object-cover object-center group-hover:opacity-75">
                     </div>
-                    <h3 class="mt-2 mb-0 text-sm text-gray-700">Franz Kafka</h3>
+                    <h3 class="mt-2 mb-0 text-sm text-gray-700">Franz Kafka {{ $resena }}</h3>
                     <h4 class="mt-1 mb-5 text-lg font-medium text-gray-900">La metamorfosis</h4>
                 </a>
             </div>
@@ -37,18 +37,7 @@
         {{-- Review --}}
         <div class="w-full md:w-3/5">
             <h2 class="text-center">Review</h2>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quam voluptatibus impedit distinctio modi
-                laborum necessitatibus, delectus repellat. Accusantium unde necessitatibus placeat, dolorum similique
-                eos ab odio. Voluptate aperiam sit molestiae.</p>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quam voluptatibus impedit distinctio modi
-                laborum necessitatibus, delectus repellat. Accusantium unde necessitatibus placeat, dolorum similique
-                eos ab odio. Voluptate aperiam sit molestiae.</p>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quam voluptatibus impedit distinctio modi
-                laborum necessitatibus, delectus repellat. Accusantium unde necessitatibus placeat, dolorum similique
-                eos ab odio. Voluptate aperiam sit molestiae.</p>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quam voluptatibus impedit distinctio modi
-                laborum necessitatibus, delectus repellat. Accusantium unde necessitatibus placeat, dolorum similique
-                eos ab odio. Voluptate aperiam sit molestiae.</p>
+            <p>{{ $resena->content }}</p>
 
             <div class="flex items-center justify-end mr-3">
                 <x-heroicon-s-heart

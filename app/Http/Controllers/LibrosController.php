@@ -13,10 +13,10 @@ class LibrosController extends Controller
         Por parametro se le pasará el id
         y devolvera $review
     */
-    public function review()
+    public function review($id)
     {
-        //$review = Review::find($id); algo asi iguess
-        return view('review');
+        $resena = Review::find($id);
+        return view('review', compact('resena'));
     }
 
     /**
@@ -26,27 +26,47 @@ class LibrosController extends Controller
     {
         $books = Book::paginate(8);
         // Obtener todos los géneros de la tabla books
-        $genres = Book::pluck('genre')->unique()->map(function ($genre) {
-            return $genre ?: 'Sin Género';
-        });
+        $genres = Book::pluck('genre')
+            ->unique()
+            ->map(function ($genre) {
+                return $genre ?: 'Sin Género';
+            });
 
-        return view('libros', compact('books','genres'));
+        return view('libros', compact('books', 'genres'));
     }
-
 
     /**
      * Display the specified resource.
      */
     public function show($titulo, $id)
     {
-        
         $libro = Book::findOrFail($id);
-        $ejReviews = Review::orderBy('createdAt', 'DESC')->take(4)->get();
-        $ejRecomendaciones = Book::inRandomOrder()->take(4)->get();
-        //$recomendaciones = where etc
 
+        // obtengo las ultimas 4 reviews
 
-        return view('ficha', compact('libro', 'ejReviews', 'ejRecomendaciones'));
+        $lastReviews = Review::where('book_id', $libro->id)
+            ->latest() // Ordenar por fecha de creación, de más reciente a más antigua
+            ->take(4) // Obtener solo las últimas 4 reviews
+            ->get();
+
+        // Obtener recomendaciones basadas en el género del libro
+        $recomendaciones = Book::where('genre', $libro->genre)
+            ->where('id', '!=', $libro->id) // Excluir el libro actual
+            ->take(4) // Tomar hasta 4 recomendaciones del mismo género
+            ->get();
+
+        // Si no hay suficientes recomendaciones en el mismo género, obtener recomendaciones aleatorias
+        if ($recomendaciones->count() < 4) {
+            $recomendacionesAleatorias = Book::where('id', '!=', $libro->id) // Excluir el libro actual
+                ->whereNotIn('id', $recomendaciones->pluck('id')->toArray()) // Excluir libros ya obtenidos
+                ->inRandomOrder() // Ordenar aleatoriamente
+                ->take(4 - $recomendaciones->count()) // Tomar la cantidad restante de recomendaciones
+                ->get();
+
+            $recomendaciones = $recomendaciones->concat($recomendacionesAleatorias);
+        }
+
+        return view('ficha', compact('libro', 'lastReviews', 'recomendaciones'));
     }
 
     /**
