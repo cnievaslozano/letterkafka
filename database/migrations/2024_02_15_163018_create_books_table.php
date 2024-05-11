@@ -4,28 +4,33 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBooksTable extends Migration
+return new class extends Migration
 {
-    public function up()
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
     {
         Schema::create('books', function (Blueprint $table) {
             $table->id();
-            $table->string('author_first_name');
-            $table->string('author_last_name');
-            $table->string('title');
-            $table->integer('pages');
-            $table->string('genres');
-            $table->float('rating');
-            $table->text('plot');
+            $table->text('title')->nullable();
+            $table->text('author')->nullable();
+            $table->text('description')->nullable();
+            $table->text('genre')->nullable();
+            $table->json('buy_links')->nullable();
+            $table->integer('pages')->nullable();
+            $table->date('release_date')->nullable();
             $table->string('cover')->nullable();
-            $table->string('url')->nullable();
             $table->timestamps();
         });
-        
+
     }
 
-    public function down()
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
     {
         Schema::dropIfExists('books');
     }
-}
+};

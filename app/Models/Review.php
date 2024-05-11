@@ -7,8 +7,27 @@ use Illuminate\Database\Eloquent\Model;
 
 class Review extends Model
 {
-    use HasFactory;
+    protected $table = 'reviews';
+    protected $fillable = [
+        'book_id',
+        'user_id',
+        'review',
+        'rating',
+        'creation_date',
+    ];
 
-    protected $fillable = ['user', 'userImage', 'username', 'createdAt', 'content', 'portada'];
+    protected $casts = [
+        'review' => 'array', // Ajusta el casting del campo 'review' a array
+        'creation_date' => 'date',
+    ];
 
+    public function book()
+    {
+        return $this->belongsTo(Book::class, 'book_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }
