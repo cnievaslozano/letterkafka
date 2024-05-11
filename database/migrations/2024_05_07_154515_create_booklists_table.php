@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('booklists', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_user');
-            $table->foreign('id_user')->references('id')->on('users');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->string('list_name', 100);
             $table->string('description', 255)->nullable();
             $table->timestamps();

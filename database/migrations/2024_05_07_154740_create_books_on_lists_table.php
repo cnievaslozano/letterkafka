@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('books_on_lists', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_book');
-            $table->foreign('id_book')->references('id')->on('books');
-            $table->unsignedBigInteger('id_list');
-            $table->foreign('id_list')->references('id')->on('booklists');
+            $table->unsignedBigInteger('book_id');
+            $table->foreign('book_id')->references('id')->on('books');
+            $table->unsignedBigInteger('list_id');
+            $table->foreign('list_id')->references('id')->on('booklists');
             $table->timestamps();
         });
     }

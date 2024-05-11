@@ -6,19 +6,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class Book extends Model
 {
+    protected $table = 'books';
     protected $fillable = [
-        'author_first_name',
-        'author_last_name',
-        'review_name',
-        'review_body',
-        'external_id',
-        'book_id',
         'title',
+        'author',
+        'description',
+        'genre',
+        'buy_links',
         'pages',
-        'genres',
-        'rating',
-        'plot',
+        'release_date',
         'cover',
-        'url',
+    ];
+
+    protected $casts = [
+        'buy_links' => 'array',
+        'release_date' => 'date',
     ];
 }

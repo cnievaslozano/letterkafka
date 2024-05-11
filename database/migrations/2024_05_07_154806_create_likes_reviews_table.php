@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('likes_reviews', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_review');
-            $table->foreign('id_review')->references('id')->on('reviews');
-            $table->unsignedBigInteger('id_user');
-            $table->foreign('id_user')->references('id')->on('users');
+            $table->unsignedBigInteger('review_id');
+            $table->foreign('review_id')->references('id')->on('reviews');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->date('like_date');
             $table->timestamps();
         });
