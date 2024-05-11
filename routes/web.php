@@ -34,13 +34,15 @@ Route::get('mi-perfil', [UserController::class, 'perfil'])->name('user.perfil');
 // FOOTER ROUTES
 Route::get('sobre-nosotros', function () {
     return view('sobre-nosotros');
-});
+})->name('sobre-nosotros');
+
 Route::get('politica-privacidad', function () {
     return view('politica-privacidad');
-});
+})->name('politica-privacidad');
+
 Route::get('contacto', function () {
     return view('contacto');
-});
+})->name('contacto');
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
     Route::get('/dashboard', function () {
