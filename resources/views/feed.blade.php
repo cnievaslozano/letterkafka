@@ -26,8 +26,12 @@
                 </div>
                 <div class="flex-grow h-0 overflow-auto">
                     @foreach ($reviews as $review)
-                        <x-kafka.post :user="$review->user" :username="$review->username" :createdAt="$review->createdAt" :content="$review->content"
-                            :portada="$review->portada" :userImage="$review->userImage" :likes="$review->likes" :minipost=false />
+                    <x-kafka.post :user="$review->user->name"
+                                  :creation_date="$review->creation_date"
+                                  :review="$review->review"
+                                  :portada="$review->book->cover"
+                                  :userImage="$review->user->profile_photo_path"
+                                  :likes="$reviewCounts[$review->id]" />
                     @endforeach
                 </div>
             </div>
@@ -36,20 +40,20 @@
             <div class="flex flex-col flex-shrink-0 w-1/4 py-4 pl-4">
                 <input class="flex items-center h-8 px-2 border border-gray-500 rounded-sm" type="search"
                     Placeholder="Search…">
-                <div>
+                {{--<div>
                     <h3 class="mt-6 font-semibold">Popular</h3>
                     @foreach ($reviewsPopulares as $popu)
-                        <x-kafka.post :user="$popu->user" :username="$popu->username" :createdAt="$popu->createdAt" :content="$popu->content"
-                            :userImage="$review->userImage" :likes="$popu->likes" :minipost=true />
-                    @endforeach
-                    
-                    <h3 class="mt-6 font-semibold">Amigos</h3>
-                    @foreach ($reviewsAmigos as $amigo)
-                        <x-kafka.post :user="$amigo->user" :username="$amigo->username" :createdAt="$amigo->createdAt" :content="$amigo->content"
-                            :userImage="$amigo->userImage" :likes="$amigo->likes" :minipost=true />
+                        <x-kafka.post :user="$popu->user" :creation_date="$popu->creation_date" :content="$popu->content"
+                            :userImage="$review->userImage" :likes="$popu->likes"  />
                     @endforeach
 
-                </div>
+                    <h3 class="mt-6 font-semibold">Amigos</h3>
+                    @foreach ($reviewsAmigos as $amigo)
+                        <x-kafka.post :user="$amigo->user" :creation_date="$amigo->creation_date" :content="$amigo->content"
+                            :userImage="$amigo->userImage" :likes="$amigo->likes"  />
+                    @endforeach
+
+                </div>--}}
             </div>
             {{-- end popu --}}
 
