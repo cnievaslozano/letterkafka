@@ -18,7 +18,7 @@
     $clickable = filter_var($clickable, FILTER_VALIDATE_BOOLEAN);
 @endphp
 @if($clickable)<x-bladewind::input type="hidden" class="rating-value-{{$name}}" selected_value="{{$rating}}" />@endif
-<div class="h-{{$sizing[$size]+$size_adjustment}} overflow-hidden inline-block">
+<div class="h-{{$sizing[$size]+$size_adjustment}}  inline-block">
 @for ($x = 1; $x < 6; $x++) 
     <div data-rating="{{$x}}" class="inline bw-rating-{{$x}} {{$name}}@if($rating!= 0 && $x <= $rating*1) rated @endif"
          @if($clickable) onmouseover="flipStars('{{$name}}', {{$rating}}, {{$x}}, 'on')" onmouseout="flipStars('{{$name}}', {{$rating}}, {{$x}}, 'off')" onclick="setRating('{{$name}}', {{$x}});{!!$onclick!!}" @endif>

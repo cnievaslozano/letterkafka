@@ -31,6 +31,8 @@
     @vite('resources/css/main.css')
     @vite('resources/css/colors.css')
 
+    <!-- JS -->
+    @vite('resources/js/app.js')
 
 </head>
 

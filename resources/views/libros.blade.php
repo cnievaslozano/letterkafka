@@ -8,7 +8,8 @@
             <div class="mt-8 grid grid-cols-1 gap-4"> 
                 @foreach ($books as $book)
                     <div class="col-span-2 md:col-span-1">
-                        <x-kafka.card 
+                        <x-kafka.card
+                            id="{{ $book->id }}" 
                             title="{{ $book->title }}" 
                             imageUrl="{{ $book->cover }}"
                             autor="{{ $book->author_first_name ? $book->author_first_name : ' ' }} {{ $book->author_last_name ? $book->author_last_name : ' ' }}"

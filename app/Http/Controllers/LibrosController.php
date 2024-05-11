@@ -4,9 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use Illuminate\Http\Request;
+use App\Models\Review;
 
 class LibrosController extends Controller
 {
+    /*
+        Devuelve la vista de una review
+        Por parametro se le pasará el id
+        y devolvera $review
+    */
+    public function review()
+    {
+        //$review = Review::find($id); algo asi iguess
+        return view('review');
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -17,28 +29,18 @@ class LibrosController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      */
-    public function show(String $title, String $author, int $id)
+    public function show($titulo, $id)
     {
-        $book = Book::find($id);
-        return view('libros.show', compact('book'));
+        
+        $libro = Book::findOrFail($id);
+        $ejReviews = Review::orderBy('createdAt', 'DESC')->take(4)->get();
+        $ejRecomendaciones = Book::inRandomOrder()->take(4)->get();
+        //$recomendaciones = where etc
+
+
+        return view('ficha', compact('libro', 'ejReviews', 'ejRecomendaciones'));
     }
 
     /**
