@@ -7,7 +7,7 @@
     <ul>
         <li><a href="/libros">Libros</a></li>
         <li><a href="/feed">Feed</a></li>
-        <li><a href="/mis-estanteriasa">Mis estanterías</a></li>
+        <li><a href="/mis-estanterias">Mis estanterías</a></li>
         @guest
         <li><a href="/register">Entrar</a></li>
         @endguest

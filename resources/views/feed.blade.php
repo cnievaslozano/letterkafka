@@ -1,12 +1,11 @@
 <x-kafka-layout>
     <x-kafka.header />
-    {{-- @auth --}}
+    @auth
     <div class="flex justify-center h-screen px-4">
         <div class="flex w-full max-w-screen-lg">
             {{-- menu lateral --}}
             <div class="flex flex-col w-64 py-4 pr-3">
                 <a class="px-3 py-2 mt-2 text-lg font-medium rounded-sm hover:bg-gray-300" href="#">Inicio</a>
-                <a class="px-3 py-2 mt-2 text-lg font-medium rounded-sm hover:bg-gray-300" href="#">Discover</a>
                 <a class="px-3 py-2 mt-2 text-lg font-medium rounded-sm hover:bg-gray-300"
                     href="#">Notificaciones</a>
                 <a class="px-3 py-2 mt-2 text-lg font-medium rounded-sm hover:bg-gray-300" href="#">Listas</a>
@@ -49,12 +48,14 @@
                         <x-kafka.post :user="$amigo->user" :username="$amigo->username" :createdAt="$amigo->createdAt" :content="$amigo->content"
                             :userImage="$amigo->userImage" :likes="$amigo->likes" :minipost=true />
                     @endforeach
-                   
+
                 </div>
             </div>
             {{-- end popu --}}
 
         </div>
     </div>
-    {{-- @endauth --}}
+    @else
+        <x-kafka.errorAuth />
+    @endauth
 </x-kafka-layout>
