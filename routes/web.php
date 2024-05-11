@@ -26,6 +26,10 @@ Route::get('mis-estanterias', [EstanteriasController::class,'index'])->name('est
 
 
 
+Route::get('/info', function () {
+    phpinfo();
+});
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
