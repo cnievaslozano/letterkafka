@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 class Review extends Model
 {
@@ -11,14 +12,13 @@ class Review extends Model
     protected $fillable = [
         'book_id',
         'user_id',
-        'review',
+        'content',
         'rating',
         'creation_date',
     ];
 
-    protected $casts = [
-        'review' => 'array', // Ajusta el casting del campo 'review' a array
-        'creation_date' => 'date',
+    protected $dates = [
+        'creation_date',
     ];
 
     public function book()
@@ -38,5 +38,10 @@ class Review extends Model
     public function likesCount()
     {
         return $this->likes()->count();
+    }
+
+    public function formatearFechaCreacion()
+    {
+        return Carbon::parse($this->attributes['creation_date'])->format('d-m-Y');
     }
 }

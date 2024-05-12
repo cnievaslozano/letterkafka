@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreign('book_id')->references('id')->on('books');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->text('review');
+            $table->text('content');
             $table->integer('rating');
             $table->date('creation_date');
             $table->timestamps();

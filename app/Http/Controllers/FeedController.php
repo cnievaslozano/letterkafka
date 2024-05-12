@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Review;
-use App\Models\LikeReview;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Follower;
+use Carbon\Carbon;
 
 
 class FeedController extends Controller
@@ -15,35 +16,50 @@ class FeedController extends Controller
      */
     public function index()
     {
-        // últimos dos review amigos
-        //$reviewsAmigos = Review::inRandomOrder()->take(2)->get();
+        // Obtener la fecha actual hace 30 días
+        $fecha_limite = Carbon::now()->subDays(30);
 
-        // las 2 reviews más popu
-        //$reviewsPopulares = Review::withCount('likes') // Cuenta los likes de cada revisión
-        //->orderBy('likes_count', 'desc') // Ordena las revisiones por cantidad de likes
-        //->take(2) // Toma solo las dos revisiones superiores
-        //->get(); // Obtén el resultado
+        // Obtener las revisiones más recientes de los últimos 30 días
+        $reviews = Review::with('user', 'book', 'likes')
+            ->whereDate('creation_date', '>=', $fecha_limite)
+            ->orderByDesc('creation_date')
+            ->take(20)
+            ->get();
 
-        // Obtener los datos necesarios para la vista
-        $reviews = Review::with('user', 'book')->latest()->take(10)->get();
+        // Calcular el número de likes para cada revisión
+        $likesReview = $reviews->mapWithKeys(function ($review) {
+            return [$review->id => $review->likesCount()];
+        });
 
-        // Obtener el número de likes para cada revisión
-        $reviewCounts = LikeReview::select('review_id', DB::raw('COUNT(*) as review_count'))
-            ->groupBy('review_id')
-            ->get()
-            ->pluck('review_count', 'review_id');
+        $reviewsPopulares = Review::with('user', 'book', 'likes')
+            ->whereDate('creation_date', '>=', $fecha_limite)
+            ->withCount('likes')
+            ->orderByDesc('likes_count')
+            ->take(2)
+            ->get();
 
-        // Obtener los IDs de las revisiones
-        $reviewIds = $reviews->pluck('id');
+        // Obtener el ID del usuario actual
+        $userId = Auth::id();
 
-        // Inicializar el array de conteos con valor cero para todas las revisiones
-        $reviewCounts = $reviewCounts->merge($reviewIds->flip()->map(function ($id) {
-            return 0;
-        }));
+        // Obtener los IDs de los amigos del usuario actual
+        $friendIds = Follower::where('following_user_id', $userId)
+            ->whereIn('followed_user_id', function ($query) use ($userId) {
+                $query->select('following_user_id')
+                    ->from('followers')
+                    ->where('followed_user_id', $userId);
+            })
+            ->pluck('followed_user_id');
+
+        // Obtener las revisiones de los amigos
+        $reviewsAmigos = Review::with('user', 'book', 'likes')
+            ->whereIn('user_id', $friendIds)
+            ->withCount('likes')
+            ->orderByDesc('creation_date')
+            ->take(2)
+            ->get();
+
 
         // Pasar los datos a la vista
-        return view('feed', compact('reviews', 'reviewCounts'));
-
-        // , 'reviewsPopulares' => $reviewsPopulares, 'reviewsAmigos' => $reviewsAmigos
+        return view('feed', compact('reviews', 'likesReview', 'reviewsPopulares', 'reviewsAmigos'));
     }
 }

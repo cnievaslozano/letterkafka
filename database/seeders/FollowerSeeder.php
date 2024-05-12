@@ -25,6 +25,7 @@ class FollowerSeeder extends Seeder
 
         // Crear 100 seguidores falsos
         for ($i = 0; $i < 100; $i++) {
+            // Seguidor que sigue a otro usuario
             $follower = new Follower();
             $follower->following_user_id = $faker->randomElement($userIds);
             $follower->followed_user_id = $faker->randomElement($userIds);
@@ -34,6 +35,17 @@ class FollowerSeeder extends Seeder
             }
             $follower->follow_date = Carbon::now()->subDays(rand(0, 365)); // Fecha de seguimiento aleatoria en el último año
             $follower->save();
+
+            // Si el seguido no está siguiendo al seguidor, entonces se siguen mutuamente
+            if (!Follower::where('following_user_id', $follower->followed_user_id)
+                ->where('followed_user_id', $follower->following_user_id)
+                ->exists()) {
+                $followerMutuo = new Follower();
+                $followerMutuo->following_user_id = $follower->followed_user_id;
+                $followerMutuo->followed_user_id = $follower->following_user_id;
+                $followerMutuo->follow_date = $follower->follow_date; // Utilizamos la misma fecha de seguimiento
+                $followerMutuo->save();
+            }
         }
     }
 }

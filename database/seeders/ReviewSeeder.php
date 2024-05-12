@@ -30,7 +30,7 @@ class ReviewSeeder extends Seeder
             $review = new Review();
             $review->book_id = $faker->randomElement($bookIds);
             $review->user_id = $faker->randomElement($userIds);
-            $review->review = $faker->paragraphs($faker->numberBetween(1, 5)); // Utiliza paragraphs() con un número aleatorio de párrafos
+            $review->content = $faker->paragraphs($faker->numberBetween(1, 5)); // Utiliza paragraphs() con un número aleatorio de párrafos
             $review->rating = $faker->numberBetween(1, 5);
             $review->creation_date = Carbon::now()->subDays(rand(0, 365))->format('Y-m-d');
             $review->save();
