@@ -4,23 +4,23 @@
     <div class="flex justify-center h-4/5 px-4">
         <div class="flex w-full max-w-screen-lg">
             {{-- menu lateral --}}
-            <div class="flex flex-col w-64 py-4 pr-3">
+            <div class="flex flex-col w-28 py-4 pr-3">
                 <a class="px-3 py-2 mt-2 text-lg font-medium rounded-sm hover:bg-gray-300"
                 href="{{route('feed.index')}}">Inicio</a>
-                <form action="{{ route('feed.index') }}" method="POST">
+                <form class="px-3 py-2 mt-2 text-lg font-medium rounded-sm hover:bg-gray-300" action="{{ route('feed.index') }}" method="POST">
                     @csrf
                     <input type="hidden" name="comunidad" value="true">
-                    <button type="submit" class="px-3 py-2 mt-2 text-lg font-medium rounded-sm hover:bg-gray-300">Comunidad</button>
+                    <button type="submit">Comunidad</button>
                 </form>
-                <form action="{{ route('feed.index') }}" method="POST">
+                <form class="px-3 py-2 mt-2 text-lg font-medium rounded-sm hover:bg-gray-300" action="{{ route('feed.index') }}" method="POST">
                     @csrf
                     <input type="hidden" name="reviews_fav" value="true">
-                    <button type="submit" class="px-3 py-2 mt-2 text-lg font-medium rounded-sm hover:bg-gray-300">Favs Posts</button>
+                    <button type="submit">Favs Posts</button>
                 </form>
                 <a class="flex px-3 py-2 mt-auto text-lg rounded-sm font-medium hover:bg-gray-200"
                 href="{{ route('user.perfil', ['username' => strtolower(str_replace(' ', '', Auth::user()->name)), 'id' => Auth::user()->id])}}">
                     @if(Auth::user()->profile_photo_path)
-                    <img src="{{Auth::user()->profile_photo_path }}" alt="Profile Image" class="flex-shrink-0 w-10 h-10 rounded-full">
+                    <img src="{{asset('storage/'. Auth::user()->profile_photo_path )}}" alt="Profile Image" class="flex-shrink-0 w-10 h-10 rounded-full">
                     @else
                         <span class="flex-shrink-0 w-10 h-10 bg-gray-400 rounded-full"></span>
                     @endif
@@ -34,11 +34,19 @@
             {{-- main feed --}}
             <div class="flex flex-col flex-grow border-l border-r border-[#493736]">
                 <div class="flex justify-between flex-shrink-0 px-8 py-4 border-b border-[#493736]">
-                    <h1 class="text-xl font-semibold">Reviews Recientes</h1>
+                    @if ($comunidad)
+                        <h1 class="text-xl font-semibold">Reviews de seguidos</h1>
+                    @elseif ($favPosts)
+                        <h1 class="text-xl font-semibold">Reviews Favoritas</h1>
+                    @else
+                        <h1 class="text-xl font-semibold">Reviews Recientes</h1>
+                    @endif
                 </div>
                 <div class="flex-grow h-0 overflow-auto">
                     @if (isset($noCoincidencias) && $noCoincidencias)
                         <div class="text-red-800 text-center my-4 text-xl">No se encontraron resultados para la búsqueda.</div>
+                    @elseif (empty($reviews))
+                    <div class="text-red-800 text-center my-4 text-xl">No se encontraron resultados</div>
                     @else
                         @foreach ($reviews as $review)
                             <x-kafka.post :user="$review->user"
@@ -49,10 +57,10 @@
                                         :likes="$review->likesCount()"
                                         :minipost="false"  />
                         @endforeach
-                    @endif
                     <div class="flex justify-center my-5">
                         <span id="mostrarMas" class="inline-block bg-br font-extrabold cursor-pointer px-4 py-2">Mostrar mas reviews</span>
                     </div>
+                    @endif
                 </div>
             </div>
             {{-- end main feed --}}

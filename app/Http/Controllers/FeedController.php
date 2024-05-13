@@ -20,6 +20,8 @@ class FeedController extends Controller
     {
         // Inicializar la variable $noCoincidencias
         $noCoincidencias = false;
+        $favPosts = false;
+        $comunidad = false;
 
         // Obtener la fecha actual hace 30 días
         $fecha_limite = Carbon::now()->subDays(30);
@@ -81,6 +83,7 @@ class FeedController extends Controller
 
         // Si se envió un formulario de búsqueda
         if ($request->has('reviews_fav')) {
+            $favPosts = true;
         // Obtener el usuario actualmente autenticado
         $user = Auth::user();
 
@@ -99,7 +102,10 @@ class FeedController extends Controller
                         ->get();
 
         }
+
+
         if ($request->has('comunidad')) {
+            $comunidad = true;
             // Obtener el usuario actualmente autenticado
             $user = Auth::user();
 
@@ -116,10 +122,12 @@ class FeedController extends Controller
                     })
                 ->take(10)
                 ->get();
+
+            $reviews = [];
         }
 
         // Pasar los datos a la vista
-        return view('feed', compact('reviews', 'noCoincidencias', 'reviewsPopulares', 'reviewsAmigos'));
+        return view('feed', compact('reviews', 'noCoincidencias', 'reviewsPopulares', 'reviewsAmigos', "comunidad","favPosts"));
     }
 
 }

@@ -72,6 +72,30 @@ class LibrosController extends Controller
         return response()->json(['success' => true, 'likesCount' => $likesCount]);
     }
 
+    public function store(Request $request)
+    {
+        // Validar los datos del formulario
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:255',
+            'author' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'genre' => 'nullable|string|max:255',
+            'buy_links' => 'nullable|string',
+            'pages' => 'nullable|integer',
+            'release_date' => 'nullable|date',
+            'cover_url' => 'nullable|string', // Validación para una URL de portada
+        ]);
+
+        // Verificar si el libro ya existe en la base de datos
+        $book = Book::firstOrCreate(
+            ['title' => $validatedData['title'], 'author' => $validatedData['author']],
+            $validatedData
+        );
+
+        // Redireccionar a alguna vista o ruta después de guardar el libro
+        return redirect()->route('admin.index')->with('success', 'Libro insertado correctamente.');
+    }
+
     /**
      * Show the form for editing the specified resource.
      */

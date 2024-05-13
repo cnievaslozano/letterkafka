@@ -6,7 +6,7 @@
         <div class="w-full md:w-2/5 flex-shrink-0 flex flex-col items-center mt-3 rounded-xl">
             <div class="flex items-center space-x-4">
                 <a class="flex items-center" href="{{ route('user.perfil', ['username' => strtolower(str_replace(' ', '', $review->user->name)), 'id' => $review->user->id]) }}">
-                    <img src="{{ asset($review->user->profile_photo_path) }}"
+                    <img src="{{ asset('storage/'. $review->user->profile_photo_path) }}"
                     alt="foto perfil {{ $review->user->name }}" class="w-16 h-16 lg:w-20 lg:h-20 rounded-full mr-3">
                     <div class="p-3">
                         <div>

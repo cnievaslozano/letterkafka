@@ -23,8 +23,6 @@
                 <x-heroicon-s-heart class="h-5 w-5 transition duration-300 ease-in-out transform hover:scale-110 hover:filter hover:brightness-110" />
                 </button>
                 <span id="likesCount_{{$content->id}}" class="font-semibold">{{ $likes }}</span>
-                <button><x-far-comment class="h-5 w-5 ml-3" /></button>
-                <span class="font-semibold ml-1">0</span>
                 <button><x-fas-share class="h-5 w-5 ml-3" /></button>
             </div>
         </div>

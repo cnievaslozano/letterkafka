@@ -105,6 +105,15 @@ class User extends Authenticatable
         return $this->hasMany(Review::class);
     }
 
+    public function getProfilePhotoUrlAttribute(){
+        return "hello";
+    }
+
+    public function contactMessages()
+    {
+        return $this->hasMany(ContactMessage::class);
+    }
+
     public static function buscarPorUsername($query, $username)
     {
         $username = strtolower(str_replace(' ', '', $username)); // Convertir a minúsculas y eliminar espacios en blanco
