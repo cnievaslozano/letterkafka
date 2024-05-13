@@ -16,10 +16,10 @@ class LibrosController extends Controller
         Por parametro se le pasará el id
         y devolvera $review
     */
-    public function review()
+    public function review($reviewId)
     {
-        $resena = Review::find($id);
-        return view('review', compact('resena'));
+        $review = Review::with('user')->findOrFail($reviewId);
+        return view('review', compact('review'));
     }
 
     /*
@@ -76,7 +76,7 @@ class LibrosController extends Controller
         $likeBook->book_id = $idBook;
         $likeBook->user_id = $user->id;
         $likeBook->like_date = date('Y-m-d');
-    
+
         $likeBook->save();
 
         return response()->json(['success' => true]);
@@ -175,10 +175,7 @@ class LibrosController extends Controller
         ]);
 
         // Verificar si el libro ya existe en la base de datos
-        $book = Book::firstOrCreate(
-            ['title' => $validatedData['title'], 'author' => $validatedData['author']],
-            $validatedData
-        );
+        $book = Book::firstOrCreate(['title' => $validatedData['title'], 'author' => $validatedData['author']], $validatedData);
 
         // Redireccionar a alguna vista o ruta después de guardar el libro
         return redirect()->route('admin.index')->with('success', 'Libro insertado correctamente.');

@@ -2,7 +2,7 @@
 
 @if (!$minipost)
     <div class="flex w-full p-8 border-b border-[#493736]">
-        <img src="{{asset($userImage) }}" class="flex-shrink-0 w-12 h-12 rounded-full object-cover"
+        <img src="{{asset('storage/'. $userImage) }}" class="flex-shrink-0 w-12 h-12 rounded-full object-cover"
             alt="Imagen de perfil del usuario {{ $user->name }}">
         <div class="flex flex-col flex-grow ml-4">
             <div class="flex">
@@ -29,7 +29,7 @@
     </div>
 @else
     <div class="flex w-full py-4 border-b border-[#493736]">
-        <img class="flex-shrink-0 w-10 h-10 rounded-full" src="{{asset($userImage) }}" />
+        <img class="flex-shrink-0 w-10 h-10 rounded-full" src="{{asset('storage/'. $userImage) }}" />
         <div class="flex flex-col flex-grow ml-2">
             <div class="flex text-sm">
                 <span class="font-semibold">{{ $user->name }}</span>

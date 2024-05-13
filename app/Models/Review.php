@@ -20,8 +20,6 @@ class Review extends Model
 
     protected $dates = [
         'creation_date',
-    protected $casts = [
-        'creation_date' => 'date',
     ];
 
     public function book()

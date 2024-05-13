@@ -5,7 +5,7 @@
         <div
             class=" col-span-1 md:col-span-2 lg:col-span-2 row-span-2 flex-shrink-0 p-3 flex flex-col items-center justify-center rounded-xl ">
             <div class="flex items-center space-x-4">
-                <img src="{{ asset($usuario->profile_photo_path) }}" alt="foto de perfil del usuario {{ $usuario->name }}"
+                <img src="{{asset('storage/'. $usuario->profile_photo_path) }}" alt="foto de perfil del usuario {{ $usuario->name }}"
                     class="w-16 h-16 lg:w-20 lg:h-20 rounded-full">
                 <div class="p-3">
                     <div>
