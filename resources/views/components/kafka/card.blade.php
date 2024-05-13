@@ -17,7 +17,7 @@
             <p class="flex text-md px-4 mt-2 mb-6">
                 Rating: {{ $rating }}
                 <span class="font-bold px-2">|</span>
-                Likes: {{ $like }}
+                <span class="flex items-center gap-1"><x-heroicon-s-heart class="w-5" /> {{ $like }}</span>
             </p>
 
             
