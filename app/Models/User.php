@@ -104,4 +104,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(Review::class);
     }
+
+    public static function buscarPorUsername($query, $username)
+    {
+        $username = strtolower(str_replace(' ', '', $username)); // Convertir a minúsculas y eliminar espacios en blanco
+        return $query->whereRaw('LOWER(REPLACE(name, " ", "")) LIKE ?', ['%' . $username . '%']);
+    }
+
 }

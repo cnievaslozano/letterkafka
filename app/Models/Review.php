@@ -37,7 +37,11 @@ class Review extends Model
 
     public function likesCount()
     {
-        return $this->likes()->count();
+
+        // Obtener la cantidad de likes para el review_id actual
+        $likesCount = $this->likes()->count();
+
+        return $likesCount;
     }
 
     public function formatearFechaCreacion()
