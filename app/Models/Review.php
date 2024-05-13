@@ -17,7 +17,6 @@ class Review extends Model
     ];
 
     protected $casts = [
-        'review' => 'array', // Ajusta el casting del campo 'review' a array
         'creation_date' => 'date',
     ];
 
