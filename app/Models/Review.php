@@ -13,12 +13,15 @@ class Review extends Model
         'book_id',
         'user_id',
         'content',
+        'content',
         'rating',
         'creation_date',
     ];
 
     protected $dates = [
         'creation_date',
+    protected $casts = [
+        'creation_date' => 'date',
     ];
 
     public function book()

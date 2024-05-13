@@ -11,16 +11,7 @@ class Book extends Model
 
     protected $table = 'books';
 
-    protected $fillable = [
-        'title',
-        'author',
-        'description',
-        'genre',
-        'buy_links',
-        'pages',
-        'release_date',
-        'cover',
-    ];
+    protected $fillable = ['title', 'author', 'description', 'genre', 'buy_links', 'pages', 'release_date', 'cover'];
 
     protected $casts = [
         'buy_links' => 'array',
@@ -49,5 +40,16 @@ class Book extends Model
     public function reviews()
     {
         return $this->hasMany(Review::class);
+    }
+
+    /**
+     * Get the average rating for the book.
+     */
+    public function avgRating()
+    {
+        $averageRating = $this->reviews->isEmpty() ? null : $this->reviews->avg('rating');
+
+        // Redondear el resultado a un decimal
+        return $averageRating !== null ? round($averageRating, 1) : 'N/A';
     }
 }

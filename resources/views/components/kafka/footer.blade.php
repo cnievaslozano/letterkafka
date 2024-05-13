@@ -6,13 +6,13 @@
         </a>
         <ul class="flex flex-wrap items-center mb-6 text-sm font-medium  sm:mb-0 ">
             <li>
-                <a href="sobre-nosotros" class="hover:underline me-4 md:me-6">Sobre nosotros</a>
+                <a href="{{ route('sobre-nosotros') }}" class="hover:underline me-4 md:me-6">Sobre nosotros</a>
             </li>
             <li>
-                <a href="politica-privacidad" class="hover:underline me-4 md:me-6">Política de Privacidad</a>
+                <a href="{{ route('politica-privacidad') }}" class="hover:underline me-4 md:me-6">Política de Privacidad</a>
             </li>
             <li>
-                <a href="contacto" class="hover:underline">Contacto</a>
+                <a href="{{ route('contacto') }}" class="hover:underline">Contacto</a>
             </li>
         </ul>
     </div>

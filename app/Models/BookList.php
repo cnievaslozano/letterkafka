@@ -8,11 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class BookList extends Model
 {
     protected $table = 'booklists';
-    protected $fillable = [
-        'user_id',
-        'list_name',
-        'description',
-    ];
+    protected $fillable = ['user_id', 'list_name', 'description'];
 
     public function user()
     {
@@ -21,7 +17,6 @@ class BookList extends Model
 
     public function books()
     {
-        return $this->hasMany(Book::class);
+        return $this->belongsToMany(Book::class, 'books_on_lists', 'list_id', 'book_id');
     }
 }
-
