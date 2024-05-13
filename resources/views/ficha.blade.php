@@ -1,5 +1,6 @@
 <x-kafka-layout>
     <x-kafka.header />
+    {{-- FICHA DEL LIBRO --}}
     <section class="text-gray-700 body-font overflow-hidden">
         <div class="container py-12 mx-auto">
             <div class="lg:w-4/5 mx-auto flex flex-wrap ">
@@ -14,43 +15,12 @@
                     @endforeach
 
                     <div class="flex mb-4">
-                        <span class="flex items-center">
-                            <svg fill="currentColor" stroke="currentColor" stroke-linecap="round"
-                                stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-red-500"
-                                viewBox="0 0 24 24">
-                                <path
-                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z">
-                                </path>
-                            </svg>
-                            <svg fill="currentColor" stroke="currentColor" stroke-linecap="round"
-                                stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-red-500"
-                                viewBox="0 0 24 24">
-                                <path
-                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z">
-                                </path>
-                            </svg>
-                            <svg fill="currentColor" stroke="currentColor" stroke-linecap="round"
-                                stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-red-500"
-                                viewBox="0 0 24 24">
-                                <path
-                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z">
-                                </path>
-                            </svg>
-                            <svg fill="currentColor" stroke="currentColor" stroke-linecap="round"
-                                stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-red-500"
-                                viewBox="0 0 24 24">
-                                <path
-                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z">
-                                </path>
-                            </svg>
-                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                stroke-width="2" class="w-4 h-4 text-red-500" viewBox="0 0 24 24">
-                                <path
-                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z">
-                                </path>
-                            </svg>
+                        <div class="flex items-center">
+                            <span class="text-gray-600 ml-3">Rating {{ $libro->avgRating() }}</span>
                             <span class="text-gray-600 ml-3">Reviews {{ $libro->reviews()->count() }}</span>
-                        </span>
+                            <span class="text-gray-600 ml-3 flex align-middle"><x-heroicon-s-heart class="w-5" />
+                                {{ $libro->likes()->count() }}</span>
+                        </div>
                         <span class="flex ml-3 pl-3 py-2 border-l-2 border-orange-800">
                             <a class="text-gray-500 transition duration-300 ease-in-out transform hover:scale-110"
                                 href="https://web.whatsapp.com/send?text=letterkafka.es%2F&text=Me%20encanta%20este%20libro:%20{{ $libro->title }}">
@@ -90,31 +60,36 @@
                     </div>
                     <p class="leading-relaxed pb-2"> {{ $libro->description }} </p>
 
-                    <div class="flex border-t-2 border-orange-800 py-2 gap-2">
-                        <div class="relative">
-                            <button type="button" @guest disabled @endguest
-                                class="peer cursor-pointer rounded-xl bg-orange-800 px-4 py-2 font-medium tracking-wide  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700  text-slate-300 "
+                    <div class="flex justify-end border-t-2 border-orange-800 py-2 gap-2">
+                        <!-- modal component -->
+                        <div x-data="{ modelOpen: false }">
+                            <button @click="modelOpen =!modelOpen"
+                                class="font-bold peer cursor-pointer rounded-xl bg-orange-800 px-4 py-2  tracking-wide  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700  text-white "
                                 aria-describedby="tooltipReview">
-                                Review
 
-                                @guest
-                                    <div id="tooltipReview"
-                                        class="absolute -top-9 left-1/2 -translate-x-1/2 z-10 whitespace-nowrap rounded  px-2 py-1 text-center text-sm  opacity-0 transition-all ease-out peer-hover:opacity-100 peer-focus:opacity-100 bg-white text-black"
-                                        role="tooltip">¡Inicia sesión!</div>
-                                @endguest
+                                <span>Hacer review</span>
+                            </button>
+
+                            <x-kafka.modal id="{{ $libro->id }}" title="{{ $libro->title }}"
+                                author="{{ $libro->author }}" />
                         </div>
+                        <!-- end modal component -->
                         <div class="relative">
-                            <button type="button" @guest disabled @endguest
+                            <button id="likeButton" type="button" @guest disabled @endguest
                                 class="peer cursor-pointer rounded-xl bg-orange-800 px-4 py-2 font-medium tracking-wide  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700  text-slate-300 "
                                 aria-describedby="tooltipLike">
-                                <x-heroicon-s-heart
-                                    class="w-6 transition duration-300 ease-in-out transform hover:scale-110 hover:filter hover:brightness-110" /></button>
+                                <x-heroicon-s-heart id="heartIcon"
+                                    class="w-6 transition duration-300 ease-in-out transform hover:scale-110 hover:filter hover:brightness-110" />
+                            </button>
+                            
                             @guest
                                 <div id="tooltipLike"
-                                    class="absolute -top-9 left-1/2 -translate-x-1/2 z-10 whitespace-nowrap rounded  px-2 py-1 text-center text-sm text-white opacity-0 transition-all ease-out peer-hover:opacity-100 peer-focus:opacity-100 bg-white :text-black"
+                                    class="absolute -top-9 left-1/2 -translate-x-1/2 z-10 whitespace-nowrap rounded  px-2 py-1 text-center text-sm  opacity-0 transition-all ease-out peer-hover:opacity-100 peer-focus:opacity-100 bg-white text-black"
                                     role="tooltip">¡Inicia sesión!</div>
                             @endguest
                         </div>
+
+
 
 
                     </div>
@@ -124,74 +99,35 @@
     </section>
 
     {{-- REVIEWS DEL LIBRO. (ver mas) --}}
-    <section class="container mx-auto px-28">
-        <h2 class="text-black title-font text-center tracking-widest"> REVIEWS </h2>
-        <ul aria-label="Reviews feed" role="feed"
-            class="mx-auto relative flex flex-col gap-12 pt-12 pl-8 before:absolute before:top-0 before:left-8 before:h-full before:border before:-translate-x-1/2 before:border-orange-800 before:border-dashed after:absolute after:top-6 after:left-8 after:bottom-6 after:border after:-translate-x-1/2 after:border-orange-800 ">
-            @foreach ($lastReviews as $review)
-                <li role="article" class="relative pl-8 ">
-                    <div class="flex flex-col flex-1 gap-4">
-                        <a href="#"
-                            class="absolute z-10 inline-flex items-center justify-center w-8 h-8 text-white rounded-full -left-4 ">
-                            <img src="{{ $review->user->profile_photo_path }}"
-                                alt="foto de perfil del usuario {{ $review->name }}" width="48" height="48"
-                                class="max-w-full rounded-full" />
-                        </a>
-                        <h4
-                            class="flex flex-col items-start text-lg font-medium leading-8 lg:items-center md:flex-row text-slate-700">
-                            <span class="flex-1">{{ $review->name }}<span
-                                    class="text-base font-normal text-slate-500">
-
-                                    {!! '@' !!}{{ $review->name }}</span></span><span
-                                class="text-sm font-normal text-orange-800">{{ \Carbon\Carbon::parse($review->createdAt)->format('Y/m/d') }}
-                            </span>
-                        </h4>
-                        <p class="text-black">{{ json_decode($review->review) }}. <a href="#">Leer más...</a>
-                        </p>
-                    </div>
-                </li>
-            @endforeach
-        </ul>
-        <div
-            class="fter:h-px flex items-center before:h-px before:flex-1  before:bg-orange-800 before:content-[''] after:h-px after:flex-1 after:bg-orange-800  after:content-['']">
-            <a type="button" href="#"
-                class="flex items-center rounded-full border border-orange-800 bg-secondary-50 px-3 py-2 text-center text-sm font-medium text-gray-900 hover:bg-orange-100">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
-                    class="mr-1 h-4 w-4">
-                    <path fill-rule="evenodd"
-                        d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                        clip-rule="evenodd" />
-                </svg>
-                Ver más
-            </a>
-        </div>
-    </section>
+    <x-kafka.reviews subtitulo="Las últimas 4 reviews" :reviews="$lastReviews" />
 
 
     {{-- LIBROS PARECIDOS/ RECOMENDADOS --}}
-    <section class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-        <h2 class="text-black mb-8 title-font text-center tracking-widest"> RECOMENDADOS </h2>
-
-        <div
-            class="grid grid-cols-1 gap-x-6 gap-y-10 xs:grid-cols-4 sm:grid-cols-4 border-t-2 border-orange-800 py-4 xl:gap-x-8">
-            @foreach ($recomendaciones as $recomendacion)
-                <a href="{{ route('libros.show', ['titulo' => Str::slug($recomendacion->title), 'id' => $recomendacion->id]) }}"
-                    class="group">
-                    <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg xl:aspect-h-8 xl:aspect-w-7">
-                        <img src="{{ $recomendacion->cover }}"
-                            alt="Tall slender porcelain bottle with natural clay textured body and cork stopper."
-                            class="transition-transform duration-300 transform hover:scale-105 h-96 w-full object-cover object-center">
-                    </div>
-                    <h3 class="mt-4 text-sm text-gray-700">{{ $recomendacion->author }}
-                        {{ $libro->author_last_name }}</h3>
-                    <h4 class="mt-1 text-lg font-medium text-gray-900">{{ $recomendacion->title }}</h4>
-                </a>
-            @endforeach
-
-        </div>
-    </section>
-
-
+    <x-kafka.bookInfo titulo="RECOMENDADOS" subtitulo="4 libros parecidos" :libros="$recomendaciones" />
 
 
 </x-kafka-layout>
+
+<script>
+    document.getElementById('likeButton').addEventListener('click', function() {
+        var bookId = {{ $libro->id }};
+
+        // Enviar la solicitud AJAX
+        fetch('/libro/' + bookId + '/like', {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                document.getElementById('heartIcon').classList.add('text-red-500'); 
+            } 
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    });
+</script>

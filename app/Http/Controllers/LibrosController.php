@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
-use Illuminate\Http\Request;
 use App\Models\Review;
+use App\Models\LikeBook;
+use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class LibrosController extends Controller
 {
@@ -19,8 +21,68 @@ class LibrosController extends Controller
         return view('review', compact('resena'));
     }
 
+    /*
+        Crear una review
+    */
+
+    public function guardarReview(Request $request)
+    {
+        try {
+            // Validar datos
+            $request->validate([
+                'book_id' => 'required|exists:books,id',
+                'review' => 'required|string|max:5000',
+                'rating' => 'required|integer|between:1,5',
+            ]);
+
+            // Obtener el usuario autenticado
+            $user = auth()->user();
+
+            // Crear y guardar la reseña
+            $review = new Review();
+            $review->content = $request->input('review');
+            $review->rating = $request->input('rating');
+            $review->book_id = $request->input('book_id');
+            $review->creation_date = date('Y-m-d');
+            $review->user_id = $user->id;
+            $review->save();
+
+            // Establecer un mensaje flash de éxito
+            flash('¡Reseña guardada con éxito!', 'bg-green-400 border border-green-400 text-white px-4 py-2 rounded-md mb-4');
+
+            // Sin redireccionar
+            return response()->json(['success' => true]);
+        } catch (ValidationException $e) {
+            // Obtener los mensajes de error
+            $errors = $e->validator->getMessageBag()->getMessages();
+
+            // Establecer un mensaje flash de error
+            flash('Error al guardar la reseña: ' . implode(', ', $errors['review'], 'bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded-md mb-4'));
+
+            // Sin redireccionar
+            return response()->json(['success' => false, 'errors' => $errors]);
+        }
+    }
+
+    /*
+        Like
+    */
+    public function darLike($idBook)
+    {
+        $user = auth()->user();
+        $likeBook = new LikeBook();
+
+        $likeBook->book_id = $idBook;
+        $likeBook->user_id = $user->id;
+        $likeBook->like_date = date('Y-m-d');
+    
+        $likeBook->save();
+
+        return response()->json(['success' => true]);
+    }
+
     /**
-     * Display a listing of the resource.
+     * LIBROS MOSTRAT TODOS.
      */
     public function index()
     {
@@ -36,7 +98,7 @@ class LibrosController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * FICHA DE UN LIBRO.
      */
     public function show($titulo, $id)
     {
@@ -45,14 +107,14 @@ class LibrosController extends Controller
         // obtengo las ultimas 4 reviews
 
         $lastReviews = Review::where('book_id', $libro->id)
-            ->latest() // Ordenar por fecha de creación, de más reciente a más antigua
-            ->take(4) // Obtener solo las últimas 4 reviews
+            ->latest()
+            ->take(4)
             ->get();
 
         // Obtener recomendaciones basadas en el género del libro
         $recomendaciones = Book::where('genre', $libro->genre)
             ->where('id', '!=', $libro->id) // Excluir el libro actual
-            ->take(4) // Tomar hasta 4 recomendaciones del mismo género
+            ->take(4)
             ->get();
 
         // Si no hay suficientes recomendaciones en el mismo género, obtener recomendaciones aleatorias
