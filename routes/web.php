@@ -29,6 +29,8 @@ Route::get('libros/{titulo}/{id}', [LibrosController::class, 'show'])->name('lib
 Route::get('review/{id}', [LibrosController::class, 'review'])->name('review.show');
 Route::get('feed', [FeedController::class, 'index'])->name('feed.index');
 Route::post('feed', [FeedController::class, 'index'])->name('feed.index');
+Route::post('feed/{idReview}/like', [LibrosController::class, 'darLikeReview'])->name('libro.like');
+Route::post('/review/{idReview}/like', [LibrosController::class, 'darLikeReview'])->name('libro.like');
 Route::get('mis-estanterias', [EstanteriasController::class, 'index'])->name('estanterias.index');
 Route::get('mi-perfil', [UserController::class, 'perfil'])->name('user.perfil');
 

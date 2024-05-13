@@ -121,4 +121,5 @@ class FeedController extends Controller
         // Pasar los datos a la vista
         return view('feed', compact('reviews', 'noCoincidencias', 'reviewsPopulares', 'reviewsAmigos'));
     }
+
 }

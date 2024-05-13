@@ -44,7 +44,7 @@
                             <x-kafka.post :user="$review->user"
                                         :creation_date="$review->formatearFechaCreacion()"
                                         :content="$review"
-                                        :portada="$review->book->cover"
+                                        :libro="$review->book"
                                         :userImage="$review->user->profile_photo_path"
                                         :likes="$review->likesCount()"
                                         :minipost="false"  />
