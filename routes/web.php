@@ -31,7 +31,7 @@ Route::post('/buscar-libros', [EstanteriasController::class, 'buscarLibros'])->n
 
 // MENU ROUTES
 Route::get('/', function () {
-    return view('home');
+    return view('home')->name('home');
 });
 Route::get('libros', [LibrosController::class, 'index'])->name('libros.index');
 Route::get('libros/{titulo}/{id}', [LibrosController::class, 'show'])->name('libros.show');
@@ -69,7 +69,7 @@ Route::get('contacto', function () {
 })->name('contacto');
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
-    Route::get('/', function () {
-        return view('home');
-    })->name('home');
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
 });
