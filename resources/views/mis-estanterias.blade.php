@@ -55,7 +55,7 @@
                                             <div class="overflow-hidden rounded-lg">
                                                 <img src="{{ asset($book->cover) }}"
                                                     alt="Portada del libro {{ $book->title }}"
-                                                    class="h-full w-full object-cover object-center group-hover:opacity-75">
+                                                    class="transition-transform duration-300 transform hover:scale-105 h-96 w-full object-cover object-center">
                                             </div>
                                             <h3 class="mt-2 mb-1 text-sm text-gray-700">{{ $book->title }}</h3>
                                             <h4 class="mb-2 text-sm text-gray-500">{{ $book->author }}</h4>

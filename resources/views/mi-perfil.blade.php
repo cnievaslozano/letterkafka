@@ -1,7 +1,7 @@
 <x-kafka-layout>
     <x-kafka.header />
     @auth
-        <div class="container mx-auto p-4 mt-4 gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 grid-rows-4">
+        <div class="container flex mx-auto p-4 mt-4 gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 grid-rows-4">
             <div
                 class=" col-span-1 md:col-span-2 lg:col-span-2 row-span-2 flex-shrink-0 p-3 flex flex-col items-center justify-center rounded-xl ">
                 <div class="flex items-center space-x-4">
@@ -24,10 +24,10 @@
                 </div>
             </div>
 
-            <div class=" col-span-1 md:col-span-1 lg:col-span-3 row-span-4 px-4 py-2 rounded-xl  flex-shrink-0">
-                <h2> Sobre mí </h2>
-                <p> {{ $usuario->about_us }}</p>
-                <div class="flex gap-3">
+            <div class="items-center justify-center col-span-1 md:col-span-2 lg:col-span-3 row-span-4 px-4 py-2 rounded-xl  flex-shrink-0">
+                <h2 class="text-center"> Sobre mí </h2>
+                <p class="text-center"> {{ $usuario->about_us }}</p>
+                <div class="flex gap-3 justify-center">
                     <a href="/user/profile"
                         class="w-fit border border-gray-400 text-white rounded-md px-4 py-2 mt-2 transition duration-500 ease select-none  focus:outline-none focus:shadow-outline bg-[#493736]">Editar
                         perfil</a>
@@ -43,7 +43,7 @@
 
             </div>
             <div
-                class=" col-span-1 md:col-span-2 lg:col-span-2 row-span-2 px-16 flex-shrink-0 flex flex-col items-start justify-center rounded-xl ">
+                class=" items-center justify-center col-span-1 md:col-span-2 lg:col-span-2 row-span-2 px-16 flex-shrink-0 flex flex-col items-start justify-center rounded-xl ">
                 <h3 class="mb-0 ml-6 ">Mis listas:</h3>
                 <ul class="ml-8">
                     @if ($usuario->bookLists->isEmpty())
