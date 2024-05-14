@@ -94,9 +94,34 @@ class LibrosController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $books = Book::paginate(8);
+        $query = Book::query();
+
+        // Aplicar filtro por género
+        if ($request->has('genre')) {
+            $query->whereIn('genre', $request->input('genre'));
+        }
+
+        // Aplicar filtro por duración en páginas
+        if ($request->has('category')) {
+            $query->where(function ($q) use ($request) {
+                foreach ($request->input('category') as $category) {
+                    // Verificar si el rango tiene el formato correcto
+                    if (strpos($category, '-') !== false) {
+                        $range = explode('-', $category);
+                        if (count($range) == 2) {
+                            $q->orWhereBetween('pages', [$range[0], $range[1]]);
+                        }
+                    }
+                }
+            });
+        }
+
+        // Otros filtros (rating, etc.) aquí
+
+        $books = $query->paginate(8);
+
         // Obtener todos los géneros de la tabla books
         $genres = Book::pluck('genre')
             ->unique()
