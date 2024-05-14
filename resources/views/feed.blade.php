@@ -7,18 +7,9 @@
                 <div class="flex flex-col w-28 py-4 pr-3">
                     <a class="px-3 py-2 mt-2 text-lg font-medium rounded-sm hover:bg-gray-300"
                         href="{{ route('feed.index') }}">Inicio</a>
-                    <form class="px-3 py-2 mt-2 text-lg font-medium rounded-sm hover:bg-gray-300"
-                        action="{{ route('feed.index') }}" method="POST">
-                        @csrf
-                        <input type="hidden" name="comunidad" value="true">
-                        <button type="submit">Comunidad</button>
-                    </form>
-                    <form class="px-3 py-2 mt-2 text-lg font-medium rounded-sm hover:bg-gray-300"
-                        action="{{ route('feed.index') }}" method="POST">
-                        @csrf
-                        <input type="hidden" name="reviews_fav" value="true">
-                        <button type="submit">Favs Posts</button>
-                    </form>
+                        <button class="px-3 py-2 mt-2 text-lg font-medium rounded-sm hover:bg-gray-300" onclick="submitForm('{{ route('feed.index') }}', 'comunidad')">Comunidad</button>
+
+                        <button class="px-3 py-2 mt-2 text-lg font-medium rounded-sm hover:bg-gray-300" onclick="submitForm('{{ route('feed.index') }}', 'reviews_fav')">Favs Posts</button>
                     <a class="flex px-3 py-2 mt-auto text-lg rounded-sm font-medium hover:bg-gray-200"
                         href="{{ route('user.perfil', ['username' => strtolower(str_replace(' ', '', Auth::user()->name)), 'id' => Auth::user()->id]) }}">
                         @if (Auth::user()->profile_photo_path)
@@ -99,3 +90,16 @@
         <x-kafka.errorAuth />
     @endauth
 </x-kafka-layout>
+
+<script>
+    function submitForm(action, inputName) {
+        var form = document.createElement('form');
+        form.setAttribute('method', 'post');
+        form.setAttribute('action', action);
+        var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        form.innerHTML = '<input type="hidden" name="_token" value="' + csrfToken + '">' +
+            '<input type="hidden" name="' + inputName + '" value="true">';
+        document.body.appendChild(form);
+        form.submit();
+    }
+</script>

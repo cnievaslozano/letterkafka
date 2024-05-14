@@ -40,8 +40,21 @@ class FeedController extends Controller
             ->where('followed_user_id', $userId)
             ->pluck('following_user_id');
 
+        // Verificar si el usuario tiene amigos
+        $tieneAmigos = $mutualFollowersIds->isNotEmpty();
+
         // Obtener las revisiones de las personas que el usuario actual sigue y que también lo siguen a él
-        $reviewsAmigos = Review::with('user', 'book', 'likes')->whereIn('user_id', $mutualFollowersIds)->whereDate('creation_date', '>=', $fecha_limite)->withCount('likes')->orderByDesc('likes_count')->take(2)->get();
+        if ($tieneAmigos) {
+            $reviewsAmigos = Review::with('user', 'book', 'likes')
+                ->whereIn('user_id', $mutualFollowersIds)
+                ->whereDate('creation_date', '>=', $fecha_limite)
+                ->withCount('likes')
+                ->orderByDesc('likes_count')
+                ->take(2)
+                ->get();
+        } else {
+            $reviewsAmigos = false;
+        }
 
         // Si se envió un formulario de búsqueda
         if ($request->has('username')) {
