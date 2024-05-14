@@ -15,7 +15,6 @@
                             like="{{ $book->likes()->count() }}" />
                     </div>
                 @endforeach
-
             </div>
             {{ $books->links('components.kafka.pagination') }}
         </div>

@@ -34,6 +34,7 @@ Route::get('/', function () {
     return view('home');
 });
 Route::get('libros', [LibrosController::class, 'index'])->name('libros.index');
+Route::get('libros/buscar', [LibrosController::class, 'buscar'])->name('libros.buscar');
 Route::get('libros/{titulo}/{id}', [LibrosController::class, 'show'])->name('libros.show');
 Route::get('review/{id}', [LibrosController::class, 'review'])->name('review.show');
 Route::get('review/{id}', [LibrosController::class, 'review'])->name('review.show');

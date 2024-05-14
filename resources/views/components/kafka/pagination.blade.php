@@ -2,24 +2,24 @@
     <nav role="navigation" aria-label="{{ __('Pagination Navigation') }}" class="flex items-center justify-between">
         <div class="flex justify-between flex-1 sm:hidden">
             @if ($paginator->onFirstPage())
-                <span class="relative inline-flex items-center px-4 py-2 text-sm font-medium bg-brown-200 border border-brown-300 cursor-default leading-5 rounded-md dark:bg-brown-800 dark:border-brown-600">
-                    {!! __('pagination.previous') !!}
-                </span>
-            @else
-                <a href="{{ $paginator->previousPageUrl() }}" class="relative inline-flex items-center px-4 py-2 text-sm font-medium bg-brown-200 border border-brown-300 leading-5 rounded-md hover:text-brown-500 focus:outline-none focus:ring ring-brown-300 focus:border-blue-300 active:bg-brown-100 active:text-brown-700 transition ease-in-out duration-150 dark:bg-brown-800 dark:border-brown-600 dark:text-brown-300 dark:focus:border-blue-700 dark:active:bg-brown-700 dark:active:text-brown-300">
-                    {!! __('pagination.previous') !!}
-                </a>
-            @endif
+            <span class="relative inline-flex items-center px-4 py-2 text-sm font-medium bg-brown-200 border border-brown-300 cursor-default leading-5 rounded-md dark:bg-brown-800 dark:border-brown-600">
+                {!! __('pagination.previous') !!}
+            </span>
+        @else
+            <a href="{{ $paginator->previousPageUrl() }}&search={{ request()->input('search') }}" class="relative inline-flex items-center px-4 py-2 text-sm font-medium bg-brown-200 border border-brown-300 leading-5 rounded-md hover:text-brown-500 focus:outline-none focus:ring ring-brown-300 focus:border-blue-300 active:bg-brown-100 active:text-brown-700 transition ease-in-out duration-150 dark:bg-brown-800 dark:border-brown-600 dark:text-brown-300 dark:focus:border-blue-700 dark:active:bg-brown-700 dark:active:text-brown-300">
+                {!! __('pagination.previous') !!}
+            </a>
+        @endif
 
-            @if ($paginator->hasMorePages())
-                <a href="{{ $paginator->nextPageUrl() }}" class="relative inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-brown-700 bg-brown-200 border border-brown-300 leading-5 rounded-md hover:text-brown-500 focus:outline-none focus:ring ring-brown-300 focus:border-blue-300 active:bg-brown-100 active:text-brown-700 transition ease-in-out duration-150 dark:bg-brown-800 dark:border-brown-600 dark:text-brown-300 dark:focus:border-blue-700 dark:active:bg-brown-700 dark:active:text-brown-300">
-                    {!! __('pagination.next') !!}
-                </a>
-            @else
-                <span class="relative inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-brown-500 bg-brown-200 border border-brown-300 cursor-default leading-5 rounded-md dark:text-brown-600 dark:bg-brown-800 dark:border-brown-600">
-                    {!! __('pagination.next') !!}
-                </span>
-            @endif
+        @if ($paginator->hasMorePages())
+            <a href="{{ $paginator->nextPageUrl() }}&search={{ request()->input('search') }}" class="relative inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-brown-700 bg-brown-200 border border-brown-300 leading-5 rounded-md hover:text-brown-500 focus:outline-none focus:ring ring-brown-300 focus:border-blue-300 active:bg-brown-100 active:text-brown-700 transition ease-in-out duration-150 dark:bg-brown-800 dark:border-brown-600 dark:text-brown-300 dark:focus:border-blue-700 dark:active:bg-brown-700 dark:active:text-brown-300">
+                {!! __('pagination.next') !!}
+            </a>
+        @else
+            <span class="relative inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-brown-500 bg-brown-200 border border-brown-300 cursor-default leading-5 rounded-md dark:text-brown-600 dark:bg-brown-800 dark:border-brown-600">
+                {!! __('pagination.next') !!}
+            </span>
+        @endif
         </div>
 
         <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-end">
@@ -108,3 +108,6 @@
         </div>
     </nav>
 @endif
+
+
+

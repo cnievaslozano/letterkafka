@@ -181,6 +181,24 @@ class LibrosController extends Controller
         return redirect()->route('admin.index')->with('success', 'Libro insertado correctamente.');
     }
 
+    public function buscar(Request $request)
+    {
+        $searchTerm = $request->input('search');
+        $books = Book::where('title', 'like', "%$searchTerm%")->paginate(8);
+
+        // Obtener todos los géneros de la tabla books
+        $genres = Book::pluck('genre')
+            ->unique()
+            ->map(function ($genre) {
+                return $genre ?: 'Sin Género';
+            });
+
+        // Agregar el término de búsqueda a la paginación
+        $books->appends(['search' => $searchTerm]);
+
+        return view('libros', compact('books', 'genres'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      */
