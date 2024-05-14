@@ -14,9 +14,9 @@
             </div>
             <div class="flex mt-3">
                 <a href="{{ route('libros.show', ['titulo' => $libro->title, 'id' => $libro->id]) }}"><img
-                        src="{{ $libro->cover }}" class="border border-black min-w-32 min-h-48"
+                        src="{{ $libro->cover }}" class="border border-black w-32 h-48"
                         alt="Portada del libro"></a>
-                <p class="ml-4">{{ $content->content }} <a
+                <p class="ml-4 w-4/5">{{ $content->content }} <a
                         href="{{ route('review.show', ['id' => $content->id]) }}">Leer más...</a></p>
             </div>
             <div class="flex mt-2">

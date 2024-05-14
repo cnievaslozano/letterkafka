@@ -1,4 +1,4 @@
-<h1>LetterKafka
+<h1 id="title" class="cursor-pointer" >LetterKafka
     <a href="/">
         <x-kafka.logo width="120" />
     </a>
@@ -21,3 +21,9 @@
         @endauth
     </ul>
 </header>
+
+<script>
+    document.getElementById('title').addEventListener('click', function() {
+        window.location.href = "/";
+    });
+</script>
