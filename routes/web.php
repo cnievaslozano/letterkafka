@@ -31,7 +31,7 @@ Route::post('/buscar-libros', [EstanteriasController::class, 'buscarLibros'])->n
 
 // MENU ROUTES
 Route::get('/', function () {
-    return view('home')->name('home');
+    return view('home');
 });
 Route::get('libros', [LibrosController::class, 'index'])->name('libros.index');
 Route::get('libros/{titulo}/{id}', [LibrosController::class, 'show'])->name('libros.show');
