@@ -1,4 +1,4 @@
-<h1>LetterKafka
+<h1 id="title" class="cursor-pointer" >LetterKafka
     <a href="/">
         <x-kafka.logo width="120" />
     </a>
@@ -13,6 +13,17 @@
         @endguest
         @auth
         <li><a href="/mi-perfil">Perfil</a></li>
+
+        {{-- Verificar si el usuario logueado tiene un correo electrónico específico --}}
+        @if(auth()->user()->email == 'andreigeorgemira@gmail.com')
+        <li><a href="/admin">Admin</a></li>
+        @endif
         @endauth
     </ul>
 </header>
+
+<script>
+    document.getElementById('title').addEventListener('click', function() {
+        window.location.href = "/";
+    });
+</script>

@@ -1,51 +1,82 @@
 <x-kafka-layout>
     <x-kafka.header />
     @auth
-    <div class="flex flex-col items-center justify-center">
-        <h2 class="text-center mt-4 ">Mis Estanterías</h2>
-        <div class="flex">
-            <div class="flex items-center">
-                <span class="font-bold"><a href="#">Readlist</a></span>
-                <span class="mx-1">•</span>
-            </div>
-            <div class="flex items-center">
-                <span><a href="#">Only Fantasy</a></span>
-                <span class="mx-1">•</span>
-            </div>
-            <div class="flex items-center">
-                <span><a href="#">Filosofica</a></span>
-                <span class="mx-1">•</span>
-            </div>
-            <div class="flex items-center">
-                <span><a href="#">Fantasía Medieval</a></span>
-            </div>
-        </div>
+        <div class="flex flex-col items-center justify-center">
+            <h2 class="text-center mt-4 ">@if ($permisos) Mis Estanterías @else Estanterías de {{$usuario->name}} @endif</h2>
+            <div class="flex">
 
-        <hr class="bg-orange-800 border-t-1 w-2/3 ">
-        <div class="flex flex-wrap">
-            @for ($i = 0; $i < 16; $i++)
-                @if ($i % 4 == 0)
-                    <div class="flex w-full justify-center gap-4">
+                @if ($usuario->bookLists->isEmpty())
+                @else
+                    @foreach ($usuario->bookLists as $bookList)
+                        <div class="flex items-center">
+                            <span class="font-bold"><a href="#">{{ $bookList->list_name }}</a></span>
+                            <span class="mx-1">•</span>
+                        </div>
+                    @endforeach
                 @endif
-                <a href="#" class="group flex flex-col items-center">
-                    <div class="overflow-hidden rounded-lg">
-                        <img src="https://placehold.co/177x250"
-                            alt="Tall slender porcelain bottle with natural clay textured body and cork stopper."
-                            class="h-full w-full object-cover object-center group-hover:opacity-75">
+
+                @if ($permisos)
+                    <div class="flex items-center ">
+                        <span class="text-md">
+                            <!-- modal component -->
+                            <div class="inline" x-data="{ modelOpen: false }">
+                                <button @click="modelOpen =!modelOpen"
+                                    class="font-bold peer cursor-pointer rounded-xl bg-orange-800 px-4 py-2  tracking-wide  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700  text-white ">Crear
+                                    lista</button>
+
+                                <x-kafka.modalEstanteria title="Crear Lista" usuarioNombre="{{ $usuario->name }}" />
+                            </div>
+                            <!-- end modal component -->
+                        </span>
                     </div>
-                    <h3 class="mt-2 mb-0 text-sm text-gray-700">Franz Kafka</h3>
-                    <h4 class="mt-1 mb-5 text-lg font-medium text-gray-900">La metamorfosis</h4>
-                </a>
-                @if (($i + 1) % 4 == 0 || $i == 19)
-        </div>
                 @endif
-            @endfor
-    </div>
+            </div>
 
-    {{-- PAGINATOR CUANDO ESTE EL BACKEND
+            <hr class="bg-orange-800 border-t-1 w-2/3 ">
+            <div class="flex flex-wrap">
+                {{-- Mostrar mensaje flash --}}
+                @if (flash()->message)
+                    <div class="{{ flash()->class }}">
+                        {{ flash()->message }}
+                    </div>
+                @endif
+                @if ($usuario->bookLists->isEmpty())
+                    <p>No hay listas de libros, crea una en <a class="inline font-bold"
+                            href="{{ route('estanterias.index') }}"> mis estanterias.</a></p>
+                @else
+                    <div class="flex flex-wrap justify-center gap-8">
+                        @foreach ($usuario->bookLists as $lista)
+                            <div class="border border-orange-800 rounded-lg p-4 mb-8">
+                                <h2 class="text-xl font-bold mb-4">{{ $lista->list_name }}</h2>
+                                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                                    @foreach ($lista->books as $book)
+                                        <a href="{{ route('libros.show', ['titulo' => Str::slug($book->title), 'id' => $book->id]) }}"
+                                            class="group flex flex-col items-center">
+                                            <div class="overflow-hidden rounded-lg">
+                                                <img src="{{ asset($book->cover) }}"
+                                                    alt="Portada del libro {{ $book->title }}"
+                                                    class="transition-transform duration-300 transform hover:scale-105 h-96 w-full object-cover object-center">
+                                            </div>
+                                            <h3 class="mt-2 mb-1 text-sm text-gray-700">{{ $book->title }}</h3>
+                                            <h4 class="mb-2 text-sm text-gray-500">{{ $book->author }}</h4>
+                                        </a>
+                                    @endforeach
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
+
+            </div>
+
+
+
+        </div>
+
+        {{-- PAGINATOR CUANDO ESTE EL BACKEND
     {{ $books->links('components.kafka.pagination') }}
    --}}
-   @else
+    @else
         <x-kafka.errorAuth />
     @endauth
 </x-kafka-layout>

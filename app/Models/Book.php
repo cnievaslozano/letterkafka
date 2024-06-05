@@ -9,19 +9,47 @@ class Book extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'author_first_name',
-        'author_last_name',
-        'review_name',
-        'review_body',
-        'external_id',
-        'book_id',
-        'title',
-        'pages',
-        'genres',
-        'rating',
-        'plot',
-        'cover',
-        'url',
+    protected $table = 'books';
+
+    protected $fillable = ['title', 'author', 'description', 'genre', 'buy_links', 'pages', 'release_date', 'cover'];
+
+    protected $casts = [
+        'buy_links' => 'array',
+        'release_date' => 'date',
     ];
+
+    /**
+     * Get the book lists that belong to this book.
+     */
+    public function bookLists()
+    {
+        return $this->belongsToMany(BookList::class, 'books_on_lists', 'book_id', 'list_id');
+    }
+
+    /**
+     * Get the likes for the book.
+     */
+    public function likes()
+    {
+        return $this->hasMany(LikeBook::class);
+    }
+
+    /**
+     * Get the reviews for the book.
+     */
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+
+    /**
+     * Get the average rating for the book.
+     */
+    public function avgRating()
+    {
+        $averageRating = $this->reviews->isEmpty() ? null : $this->reviews->avg('rating');
+
+        // Redondear el resultado a un decimal
+        return $averageRating !== null ? round($averageRating, 1) : 'N/A';
+    }
 }

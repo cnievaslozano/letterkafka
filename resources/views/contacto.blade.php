@@ -7,30 +7,31 @@
             <p class="mb-4 lg:mb-16 font-light text-center   sm:text-xl">
                 ¿Algún problema técnico? ¿Quiere enviar comentarios sugerencias sobre alguna posible nueva característica? ¿Necesita detalles sobre nuestro plan <span class="font-bold">PRO</span>? Haznos saber
             </p>
-            <form action="#" class="space-y-8">
+            @if(session('error'))
+                <div class="bg-red-400 border border-red-400 text-white px-4 py-2 rounded-md mb-4">
+                    {{ session('error') }}
+                </div>
+            @endif
+            @if (session('success'))
+                <div class="bg-green-400 border border-green-400 text-white px-4 py-2 rounded-md mb-4">
+                    {{ session('success') }}
+                </div>
+            @endif
+            <form action="{{ route('admin.store') }}" class="space-y-8" method="POST">
+                @csrf
                 <div>
-                    <label for="email" class="block mb-2 font-medium text-gray-900 ">Tu
-                        correo electrónico</label>
-                    <input type="email" id="email"
-                        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#7e6867] focus:border-[#7e6867] block w-full p-2.5"
-                        placeholder="ejemplo@letterkafka.com" required>
+                    <label for="email" class="block mb-2 font-medium text-gray-900">Tu correo electrónico</label>
+                    <input type="email" id="email" name="email" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#7e6867] focus:border-[#7e6867] block w-full p-2.5" placeholder="ejemplo@letterkafka.com" required>
                 </div>
                 <div>
-                    <label for="subject" class="block mb-2  font-medium text-gray-900">Asunto</label>
-                    <input type="text" id="subject"
-                        class="block p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 shadow-sm focus:ring-[#7e6867] focus:border-[#7e6867] "
-                        placeholder="Permítenos saber en qué te podemos ayudar" required>
+                    <label for="subject" class="block mb-2 font-medium text-gray-900">Asunto</label>
+                    <input type="text" id="subject" name="subject" class="block p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 shadow-sm focus:ring-[#7e6867] focus:border-[#7e6867]" placeholder="Permítenos saber en qué te podemos ayudar" required>
                 </div>
                 <div class="sm:col-span-2">
-                    <label for="message" class="block mb-2  font-medium text-gray-900 ">Tu
-                        mensaje</label>
-                    <textarea id="message" rows="6"
-                        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg shadow-sm border border-gray-300 focus:ring-[#7e6867] focus:border-[#7e6867]"
-                        placeholder="Deja un comentario..."></textarea>
+                    <label for="message" class="block mb-2 font-medium text-gray-900">Tu mensaje</label>
+                    <textarea id="message" name="message" rows="6" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg shadow-sm border border-gray-300 focus:ring-[#7e6867] focus:border-[#7e6867]" placeholder="Deja un comentario..."></textarea>
                 </div>
-                <button type="submit"
-                    class="py-3 px-5  font-medium text-center rounded-lg bg-[#493736] text-white sm:w-fit  focus:ring-4 focus:outline-none focus:ring-orange-200  ">Enviar
-                    mensaje</button>
+                <button type="submit" class="py-3 px-5 font-medium text-center rounded-lg bg-[#493736] text-white sm:w-fit focus:ring-4 focus:outline-none focus:ring-orange-200">Enviar mensaje</button>
             </form>
         </div>
     </section>

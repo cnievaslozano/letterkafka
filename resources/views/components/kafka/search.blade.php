@@ -1,7 +1,8 @@
-<form class="flex items-center max-w-sm mx-auto mt-28 mb-4 px-4 sm:px-6  lg:max-w-7xl lg:px-8">
+<form action="{{ route('libros.buscar') }}" method="GET"
+    class="flex items-center max-w-sm mx-auto mt-28 mb-4 px-4 sm:px-6  lg:max-w-7xl lg:px-8">
     <label for="simple-search" class="sr-only">Buscar</label>
     <div class="relative w-full">
-        <input type="text" id="simple-search"
+        <input type="text" id="simple-search" name="search"
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-300 block w-full ps-4 p-2.5"
             placeholder="Buscar por nombre..." />
     </div>
