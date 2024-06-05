@@ -273,6 +273,7 @@ header {
         align-items: center;
         border: solid var(--brown);
         border-width: 1px 0;
+        padding: 0;
 
         >li {
             flex: 1;
@@ -283,7 +284,13 @@ header {
         >li:hover {
             transform: scale(1.1);
         }
+
+        @media (max-width: 700px) {
+            flex-direction: column; // Cambiar a dirección de columna en pantallas pequeñas
+            align-items: stretch; // Estirar los elementos verticalmente
+        }
     }
+    
 }
 
 @media (min-width: 700px) {
