@@ -1,5 +1,7 @@
 # Proyecto: Red Social y Marketplace de Libros
 
+[letterkafka.es ](letterkafka.es )
+
 ## Autores
 
 - Cristian David Nievas Lozano
@@ -25,4 +27,17 @@ Este proyecto busca crear una plataforma que combine elementos de una red social
 - **Búsqueda y filtrado de libros:** Permitirá a los usuarios buscar libros por categorías, autores, etc.
 - **Listas** Cada usuario puede crear sus propias listas de libros.
 
+# Vistas
+Algunas de las vistas principales
 
+### Main
+![letterkafka](https://github.com/user-attachments/assets/50e45208-4cda-4109-833b-7e8c7dc2f8f4)
+
+### Libros
+![image](https://github.com/user-attachments/assets/6f667d79-9c44-444b-8c07-f627829fe312)
+
+### Feed
+
+### Mis estanterías
+
+### Mi perfil
